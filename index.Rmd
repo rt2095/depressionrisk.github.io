@@ -1,5 +1,5 @@
 ---
-title: "Predictors of Depression risk in older adults "
+title: "Predictors of Depression Risk in Older Adults "
 output: 
   html_document:
     toc: true

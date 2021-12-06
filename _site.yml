@@ -1,18 +1,23 @@
-name: "Yay internet!"
+name: "Predictors of Depression risk in Older Adults"
 output_dir: "."
 navbar:
-  title: "Overview"
-  right:
-    - text: "About"
-      href: resume.html
-    - text: "Plotly"
+  title: "Home"
+  left:
+    - text: "Data"
+      href: data.html
+    - text: "Exploratory Analysis"
       href: Plotly.html
     - text: "Dashboard"
       href: dashboard.html
+    - text: "Conclusions"
+      href: conclusions.html
+  right:
+    - text: "Project Report"
+      href: final_report.html
     - icon: fa-envelope fa-lg
       href: mailto:<rt2640@cumc.columbia.edu>
     - icon: fa-github fa-lg
-      href: http://github.com/<rt2095>/
+      href: https://github.com/rt2095/depressionrisk.github.io.git
 output:
   html_document:
     css:bootstrap.min(1).css
