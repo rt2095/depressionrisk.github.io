@@ -1,7 +1,7 @@
 name: "Predictors of Depression risk in Older Adults"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "HOME"
   left:
     - text: "Data"
       href: data.html
