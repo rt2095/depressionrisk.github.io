@@ -6,7 +6,7 @@ navbar:
     - text: "Data"
       href: data.html
     - text: "Exploratory Analysis"
-      href: Plotly.html
+      href: exploratory_analysis.html
     - text: "Dashboard"
       href: dashboard.html
     - text: "Conclusions"
