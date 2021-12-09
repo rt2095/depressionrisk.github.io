@@ -10,6 +10,7 @@ output:
 library(haven)
 library(tidyverse)
 library(plotly)
+library(knitr)
 
 knitr::opts_chunk$set(
   fig.width = 6,
@@ -111,6 +112,25 @@ Furthermore, the outcome variable of interest was:
 #### Exploratory analysis: add link to dashboard.  
 
 Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
+
+**Summary Statistics for PHQ-2 outcome:**
+```{r, echo=FALSE, fig.align='center'}
+nhats  %>% 
+ summarise(
+          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
+          "min phq-2" = min(phq.total, na.rm = TRUE),
+          "med phq-2" = median(phq.total, na.rm = TRUE),
+          "max phq-2" = max(phq.total, na.rm = TRUE),
+        
+          ) %>%  knitr::kable()
+```
+
+**Frequency of depression within this data set:**
+```{r, echo=FALSE, fig.align='center'}
+nhats  %>% group_by(phq_cat) %>% 
+ summarise(
+         frequency = n()) %>%  knitr::kable()
+```
 
 - Figure 1: Demographic frequencies:
 
