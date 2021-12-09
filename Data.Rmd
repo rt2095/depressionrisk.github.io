@@ -1,0 +1,122 @@
+---
+title: <center> Data </center>
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+library(haven)
+library(tidyverse)
+library(plotly)
+```
+
+### Round 5 NHATS Dataset and relevant variables
+The National Health and Aging Trends Study (NHATS) is a country-wide survey program that collects information on a nationally representative sample of Medicare beneficiaries aged 65 years and older.Data is collected through annual, in-person interviews to collect information on disablement and its consequences. Detailed information is collected on participants’ physical and cognitive capacity, how activities
+of daily life are carried out, the social, physical, and technological environment, and participation
+in valued activities. The NHATS data was first collected in 2011 and the Round 5 data collected in 2015 was the replenishment of the sample set to correctly represent the older Medicare population (NHATS User guide).
+
+
+For the purposes of this study we used data from Round 5 and included the variables ID, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, whether or not they have no one to talk to, self reported memory issues causing problems, self-rated health, and whether they are happy with their living situation. 
+
+In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
+
+Categorical variables were recoded to include descriptions of values and converted into factors.
+
+The following variables will be included in analyses:
+
+* `gender`: Gender (Male, Female)
+* `age_cat`: Categorical age at interview (65 to 69, 70 to 74, 75 to 79, 80-84, 85-89, 90+)
+* `race_ethnicity`: Race and hispanic ethnicity (White, non-hispanic; Black, non-hispanic; Other, non-Hispanic; Hispanic)
+* `cane_walker_wheelchair`: Used cane, walker, wheelchair (Yes, No)
+* `memory`: Rate your memory (Excellent, Very Good, Good, Fair, Poor)
+* `overall_health`: Overall health condition (Excellent, Very Good, Good, Fair, Poor)
+* `likes_living_situation`: Likes living situation (Agree a lot, Agree a little, Agree not at all)
+* `social_network_size`: Social network size (0, 1, 2, 3, 4, 5)
+
+The outcome variable of interest is:
+
+*`PHQ-cat`: Depression (dichotomized based on total PHQ-2 score)
+
+```{r nhats, include = FALSE}
+nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
+  select(spid, hc5depresan1, hc5depresan2, r5dgender, r5d2intvrage, rl5dracehisp, md5canewlker, 
+         sn5dnumsn, cg5ratememry, hc5health, wb5truestme4) %>%
+  janitor::clean_names() %>%   
+  filter(hc5depresan1 > 0, hc5depresan2 > 0, sn5dnumsn >= 0, r5d2intvrage > 0, md5canewlker > 0, 
+         cg5ratememry > 0, hc5health > 0, wb5truestme4 > 0, rl5dracehisp < 5)
+
+nhats %>% 
+  select(hc5depresan1, hc5depresan2)  %>% 
+  rowSums(na.rm = TRUE) -> nhats$phq.total
+
+nhats = nhats %>%
+  mutate(phq.total = phq.total - 2) %>% 
+  mutate(phq_cat = if_else(phq.total < 3, "Mild/No Depression", "Moderate/Severe Depression")) %>% 
+  mutate(
+    gender = recode(r5dgender, `1` = "Male", `2` = "Female"),
+    gender = factor(gender),
+    age_cat = recode(r5d2intvrage, `1` = "65 to 69", `2` = "70 to 74", `3` = "75 to 79", 
+                 `4` = "80 to 84", `5` = "85 to 89", `6` = "90+"),
+    age_cat = factor(age_cat, levels = c("65 to 69", "70 to 74", "75 to 79", "80 to 84", 
+                  "85 to 89", "90+")),
+    race_ethnicity = recode(rl5dracehisp, `1` = "White, non-hispanic", `2` = "Black, non-hispanic", 
+                  `3` = "Other, non-hispanic", `4` = "Hispanic"),
+    race_ethnicity = factor(race_ethnicity),
+    cane_walker_wheelchair = recode(md5canewlker, `1` = "Yes", `2` = "No"),
+    cane_walker_wheelchair = factor(cane_walker_wheelchair),
+    memory = recode(cg5ratememry, `1` = "Excellent", `2` = "Very Good", `3` = "Good", 
+                    `4` = "Fair", `5` = "Poor"),
+    memory = factor(memory, c("Excellent", "Very Good", "Good", "Fair", "Poor")),
+    overall_health = recode(hc5health, `1` = "Excellent", `2` = "Very Good", `3` = "Good", 
+                    `4` = "Fair", `5` = "Poor"),
+    overall_health = factor(overall_health, levels = c("Excellent", "Very Good", "Good", "Fair", 
+                    "Poor")),
+    likes_living_situation = recode(wb5truestme4, `1` = "Agree a lot", `2` = "Agree a little", 
+                    `3` = "Agree not at all"),
+    likes_living_situation = factor(likes_living_situation, c("Agree a lot", "Agree a little", 
+                    "Agree not at all")),
+    ) %>% 
+    rename(social_network_size = sn5dnumsn)
+```
+
+Preliminary exploratory visualizations of the three demographic variables, gender, age, and race/ethnicity, to illustrate the frequencies per category. 
+
+
+```{r nhats_demo, include=FALSE}
+gender_bar = 
+  nhats  %>%   
+  count(gender) %>% 
+  mutate(gender = fct_reorder(gender, n)) %>% 
+  plot_ly(x = ~gender, y = ~n, color = ~gender, type = "bar", colors = "viridis") 
+
+age_bar = 
+  nhats  %>%   
+  count(age_cat) %>% 
+  plot_ly(x = ~age_cat, y = ~n, color = ~age_cat, type = "bar", colors = "viridis") 
+
+race_bar = 
+  nhats  %>%   
+  count(race_ethnicity) %>% 
+  mutate(race_ethnicity = fct_reorder(race_ethnicity, n)) %>% 
+  plot_ly(x = ~race_ethnicity, y = ~n, color = ~race_ethnicity, type = "bar", colors = "viridis") %>% 
+  layout(plot_bgcolor = "f8f8f8",
+         xaxis = list(tickfont = list(size = 11)), 
+         titlefont = list(size = 16),
+         showlegend = FALSE)
+
+demo_bar = subplot(gender_bar, age_bar, race_bar, nrows = 3) %>%
+  layout(xaxis3 = list(title = "Categories"), 
+         yaxis2 = list(title = "Frequency"),
+         title = list(text = "Demographic frequencies"), 
+         titlefont = list(size = 14),
+        legend = list(font = list(size = 10)))
+```
+
+```{r}
+demo_bar 
+```
+
+
+

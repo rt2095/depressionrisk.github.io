@@ -13,9 +13,11 @@ library(rmarkdown)
 library(tidyverse)
 library(plotly)
 library(haven)
+#we should delete unnecessary packages 
 ```
 
 ```{r nhats}
+
 nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
   select(spid, hc5depresan1, hc5depresan2, r5dgender, r5d2intvrage, rl5dracehisp, md5canewlker, 
          sn5dnumsn, cg5ratememry, hc5health, wb5truestme4) %>%
@@ -55,71 +57,33 @@ nhats = nhats %>%
     likes_living_situation = factor(likes_living_situation, c("Agree a lot", "Agree a little", 
                     "Agree not at all"), ordered = TRUE)
 )
+
 ```
 
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Participant view of living situation predictor against PHQ-2, stratified by race (EM)
+### Participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
+
 ```{r}
-ll_white = 
-  nhats %>%   
-  filter(race_ethnicity == "White, non-hispanic" ) %>% 
-  plot_ly(x = ~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1), type = "scatter", 
-          mode = "markers", marker = list(color = "red")) %>% 
-  layout(plot_bgcolor = "fffefa") 
 
-ll_black = 
-  nhats %>%   
-  filter(race_ethnicity == "Black, non-hispanic" ) %>% 
-  plot_ly(x = ~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1), type = "scatter", 
-          mode = "markers", marker = list(color = "blue")) %>% 
-  layout(plot_bgcolor = "fffefa") 
+living_plot = nhats %>% 
+  ggplot(aes(x = likes_living_situation, y = phq.total, color = race_ethnicity)) + 
+  geom_point(position = "jitter", size = 0.5) + 
+  labs(title = "View of living situation and PHQ-2 score distribution",
+       x = "Likes living situation", y = "PHQ-2 score") + 
+  facet_grid(rows = vars(race_ethnicity)) + 
+  theme(legend.position = "none")
 
-ll_other = 
-  nhats %>%   
-  filter(race_ethnicity == "Other, non-hispanic" ) %>% 
-  plot_ly(x = ~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1),  type = "scatter", 
-          mode = "markers", marker = list(color = "green")) %>% 
-  layout(plot_bgcolor = "fffefa") 
+ggplotly(living_plot)
 
-ll_hisp = 
-  nhats %>%   
-  filter(race_ethnicity == "Hispanic" ) %>% 
-  plot_ly(x = c~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1), type = "scatter", 
-          mode = "markers", marker = list(color = "orange")) %>% 
-  layout(plot_bgcolor = "fffefa") 
-
-
-ll_scatter = subplot(ll_white, ll_black, ll_other, ll_hisp, nrows = 4, shareX = TRUE, shareY = TRUE) %>%
-  layout(xaxis = list(
-    title = "Likes Living Situation", 
-    nticks = 3), 
-    ticktext = list("Agree a lot", "Agree a little", "Agree not at all"),
-    tickvals = list(1, 2, 3), 
-         yaxis = list(title = "PHQ-2"),
-         title = list(text = "Participant view of living situation and PHQ-2 score distribution"), 
-         titlefont = list(size = 14),
-    showlegend=FALSE) # legend will have to be emulated with "annotations" indicating categories of each subplot
-       
-ll_scatter 
 ```
 
 ### Differences in depression outcome by social network.
 
-Plotting social network and health by phq_cat:
+Plotting health by phq_cat:
 
 ```{r}
-sn_phq = nhats %>% 
-  ggplot(aes(x = sn5dnumsn, group = phq_cat)) + 
-    geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat = "count") +
-    geom_text(aes( label = scales::percent(round(..prop.., 3)),
-                   y = ..prop.. ), stat = "count", vjust = -.3, size = 2.5) +
-    labs(y = "Percent", fill = "SN") +
-    facet_grid(~phq_cat) +
-    scale_y_continuous(labels = scales::percent)
-
-ggplotly(sn_phq)
 
 health_phq = nhats %>% 
   filter(hc5health > 0) %>%
@@ -132,6 +96,7 @@ health_phq = nhats %>%
     scale_y_continuous(labels = scales::percent)
 
 ggplotly(health_phq)
+
 ```
 
 Column {data-width=500}
@@ -140,6 +105,7 @@ Column {data-width=500}
 ### Differences in depression outcome by self-rated memory. 
 
 ```{r}
+
 mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
   summarise(n = n()) %>% mutate(
   proportion = (n / sum(n)))
@@ -160,6 +126,7 @@ ggplotly(memory_plot)
 ### Differences in depression outcome by use of cane walker/wheelchair. 
 
 ```{r}
+
 cane_walker_wc_plot = nhats %>%  
     group_by(phq_cat, cane_walker_wheelchair) %>% 
     summarise(n = n()) %>%  
@@ -176,4 +143,5 @@ cane_walker_wc_plot =
     scale_y_continuous(labels = scales::percent)
 
   ggplotly(cane_walker_wc_plot)
+  
 ```

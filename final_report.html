@@ -13,8 +13,8 @@
 
 <title>P8105 - Final Project Report</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -320,7 +320,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="data.html">Data</a>
+  <a href="Data.html">Data</a>
 </li>
 <li>
   <a href="exploratory_analysis.html">Exploratory Analysis</a>
@@ -382,7 +382,7 @@ div.tocify {
 </div>
 <div id="data" class="section level4">
 <h4>Data</h4>
-<p><strong>Source</strong>: National Health and Aging Trends Study from Johns Hopkins and Westat</p>
+<p><strong>Source</strong>: National Health and Aging Trends Study from Johns Hopkins and Westat.</p>
 <p><strong>Methods and data cleaning</strong>: Using only round 5 data, included ID variable, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4).</p>
 <p>In data cleaning, responses of missing, don’t know, refused or inapplicable were removed for all variables of interest. Furthermore, variables were renamed to provide descriptive names and categorical variables were recoded to provide descriptions of values. Additionally, categorical variables were converted into factors.</p>
 <p>We created a dichotomous variable phq_cat regarding depression status. In creating this variable, the sum of the two PHQ items was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.</p>
@@ -409,7 +409,7 @@ div.tocify {
 <li><p>Figure 1: Demographic frequencies:</p></li>
 <li><p>Figure 2: Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM)</p></li>
 <li><p>Figure 3: Plotting social network by phq_cat:</p></li>
-<li><p>Figure 4: Plotting health condition by phq_cat</p></li>
+<li><p>Figure 4: Plotting health condition by phq_cat:</p></li>
 <li><p>Figure 5: Self rated memory and depression categories</p></li>
 <li><p>Figure 6: Use of assistive devices (cane, walker, wheelchair) and depression outcomes (PHQ-2)</p></li>
 </ul>
@@ -581,7 +581,7 @@ Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity 
 </div>
 <div id="discussion" class="section level5">
 <h5>Discussion:</h5>
-<p>The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expecations. For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were significant protective factors of depression compared to the reference group (65-69). We also didn’t find any significant associations with gender, or social network sizes.</p>
+<p>The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations. For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn’t find any significant associations with gender, or social network sizes.</p>
 <p>The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing “poor” health to “excellent” health. We also see that self-rated memory and if someone likes their living situation can also be significant risk factots for depression among this population.</p>
 <p><em>Code for exploratory analyses RMD - kept getting error messages again when trying to knit. need to copy over.</em> - onyeka</p>
 <center>
@@ -611,7 +611,7 @@ Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity 
 </tr>
 </tbody>
 </table>
-<p><strong>Frequency of depression within this data set:</strong></p>
+<p><strong>Frequency of high depression risk within this data set:</strong></p>
 <table>
 <thead>
 <tr class="header">
