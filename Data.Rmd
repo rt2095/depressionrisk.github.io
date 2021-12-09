@@ -114,7 +114,7 @@ demo_bar = subplot(gender_bar, age_bar, race_bar, nrows = 3) %>%
         legend = list(font = list(size = 10)))
 ```
 
-```{r}
+```{r, warning=FALSE}
 demo_bar 
 ```
 
