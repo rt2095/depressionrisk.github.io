@@ -1,15 +1,20 @@
 ---
-title: <center> Predictors of Depression Risk in Older Adults  </center>
+title: <center> What factors help to predict depression risk in older adults? </center>
 output: 
   html_document:
     toc: true
     toc_float: true
 ---
 
+<center>
+<img src = "depression-1.jpg" style = "width: 75%"> </center> 
 
-### Introduction:
 
-Previous literature has examined a wide range of risk factors for depression in
+
+<center>
+#### Introduction:
+</center>
+Previous literature has examined a **wide range of risk factors for depression** in
 older adults. Older age, female gender, isolation, and physical health
 have all be found to be risk factors for depression in older adults
 (Sözeri-Varma). Memory issues and disorders affecting cognition are also
