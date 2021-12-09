@@ -93,7 +93,7 @@ ll_hisp =
 
 ll_scatter = subplot(ll_white, ll_black, ll_other, ll_hisp, nrows = 4, shareX = TRUE, shareY = TRUE) %>%
   layout(xaxis = list(
-    title = "likes living situation", 
+    title = "Likes Living Situation", 
     nticks = 3), 
     ticktext = list("Agree a lot", "Agree a little", "Agree not at all"),
     tickvals = list(1, 2, 3), 
@@ -150,14 +150,14 @@ mem_plot = nhats %>%  group_by(phq_cat, memory) %>%
     geom_point(alpha = 0.5, color = "red") + 
     facet_grid(~phq_cat) + 
     labs( title = "Self rated memory and depression outcomes",
-    x = "Self rated memory", y = " Proportion of respondents")+  
+    x = "Self Rated Memory", y = " Proportion of Respondents")+  
     scale_y_continuous(labels = scales::percent)
   
 ggplotly(memory_plot)
 
 ```
 
-### Differences in depression outcome by use of cane walker wheelchair. 
+### Differences in depression outcome by use of cane walker/wheelchair. 
 
 ```{r}
 cane_walker_wc_plot = nhats %>%  
@@ -169,8 +169,8 @@ cane_walker_wc_plot =
   cane_walker_wc_plot %>%  
   ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
   geom_col(fill= "light blue") + facet_grid(~phq_cat)+
-  labs( title = "Use of cane walker wheelchair and depression outcomes",
-      x = "Asked if used a cane walker wheel chair", y = " Proportion of respondents")+  
+  labs( title = "Use of cane walker/wheelchair and depression outcomes",
+      x = "Asked if used a cane walker/ wheel chair", y = " Proportion of respondents")+  
     scale_x_discrete(
       labels = c("Yes","No")) + 
     scale_y_continuous(labels = scales::percent)
