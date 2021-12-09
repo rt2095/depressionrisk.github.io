@@ -11,42 +11,13 @@ library(plotly)
 library(haven)
 ```
 
----
-title: "preliminary_data_cleaning"
-output: github_document
-always_allow_html: true
----
 
-```{r setup, include=FALSE}
-library(haven)
-library(tidyverse)
-library(plotly)
-```
 
-## Importing NHATS data and selecting only relevant variables
 
-Using only round 5 data, included ID variable, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, whether or not they have no one to talk to, self reported memory issues causing problems, self-rated health, and whether they are happy with their living situation. 
 
-In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
 
-Categorical variables were recoded to include descriptions of values and converted into factors.
 
-The following variables will be included in analyses:
-
-* `gender`: Gender (Male, Female)
-* `age_cat`: Categorical age at interview (65 to 69, 70 to 74, 75 to 79, 80-84, 85-89, 90+)
-* `race_ethnicity`: Race and hispanic ethnicity (White, non-hispanic; Black, non-hispanic; Other, non-Hispanic; Hispanic)
-* `cane_walker_wheelchair`: Used cane, walker, wheelchair (Yes, No)
-* `memory`: Rate your memory (Excellent, Very Good, Good, Fair, Poor)
-* `overall_health`: Overall health condition (Excellent, Very Good, Good, Fair, Poor)
-* `likes_living_situation`: Likes living situation (Agree a lot, Agree a little, Agree not at all)
-* `social_network_size`: Social network size (0, 1, 2, 3, 4, 5)
-
-The outcome variable of interest is:
-
-*`PHQ-cat`: Depression (dichotomized based on total PHQ-2 score)
-
-```{r nhats}
+```{r nhats, echo=FALSE}
 nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
   select(spid, hc5depresan1, hc5depresan2, r5dgender, r5d2intvrage, rl5dracehisp, md5canewlker, 
          sn5dnumsn, cg5ratememry, hc5health, wb5truestme4) %>%
@@ -85,8 +56,55 @@ nhats = nhats %>%
     likes_living_situation = factor(likes_living_situation, c("Agree a lot", "Agree a little", 
                     "Agree not at all")),
     ) %>% 
-    rename(social_network_size = sn5dnumsn)
+  rename(social_network_size = sn5dnumsn)
 ```
+
+
+<center>
+**Summary Statistics for PHQ-2 outcome:**</center>
+```{r ,echo=FALSE}
+
+nhats  %>% 
+ summarise(
+          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
+          "min phq-2" = min(phq.total, na.rm = TRUE),
+          "med phq-2" = median(phq.total, na.rm = TRUE),
+          "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
+```
+
+**Frequency of high depression risk within this data set:**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat) %>% 
+ summarise(
+         frequency = n()
+         ) %>%  knitr::kable()
+```
+
+**Race/ ethnicity frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  race_ethnicity,
+              values_from = frequency) %>%  knitr::kable()
+```
+
+**Gender frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, gender) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  gender,
+              values_from = frequency) %>%  knitr::kable()
+```
+
+
+
+
+
 
 Preliminary exploratory visualizations of the three demographic variables, gender, age, and race/ethnicity, to illustrate the frequencies per category. 
 

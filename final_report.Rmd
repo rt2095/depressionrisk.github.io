@@ -73,7 +73,6 @@ nhats = nhats %>%
 Ifrah Fayyaz (if2282), Lydia Parr (lcp2148), Lauren Cohen (lcc2181), Onyeka Isamah (oi2142), Riddhi Thakkar (rt2640) 
 
 
-
 #### Introduction:
 Previous literature has examined a wide range of risk factors for depression in older adults. Older age, female gender, isolation, and physical health have all be found to be risk factors for depression in older adults (Sözeri-Varma). Memory issues and disorders affecting cognition are also associated with depression risk (Köhler et al, 2010). Depression risk in older adults is also associated with race and ethnicity, with evidence certain groups have a higher risk of depression (Hooker et al, 2019). The outcome will be the PHQ-2, which sums two variables rating mood and well-being on a Likert scale (validated by Kroenke et al, 2003).
 
@@ -84,17 +83,14 @@ The motivation for this project is to identify predictors of depression outcomes
 Most of our questions were related to defining our research question and transslating our research question into methods. Initially, we wanted to see what variables had an effect on quality of life within our population in the dataset. We needed to get more specific about our analyses plan, so we had to ask questions as to the best variables to include and the best methods to manipulate and define them. For example, we asked ourselves how we would measure the depression outcome. Considering this question led to creating a new variable that would serve has the PHQ-2 measure. Since there were a number of possible predictors available in the data set, we had to evolve our initial question by specifying which predictors we wanted to explore in the analyses. We also spent time considering which levels should be excluded and how to correctly order factor variables. 
 
 #### Data 
-**Source**: National Health and Aging Trends Study
-from Johns Hopkins and Westat
+**Source**: National Health and Aging Trends Study from Johns Hopkins and Westat.
 
 **Methods and data cleaning**: 
-Using only round 5 data, included ID variable, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4). 
+We used data from Round 5 and included the ID variable, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, self-rated memory, self-rated health, and whether they are happy with their living situation. In data cleaning, responses of missing, don’t know, refused or inapplicable were removed for all variables of interest. Furthermore, variables were renamed to provide descriptive names and categorical variables were recoded to provide descriptions of values. Additionally, categorical variables were converted into factors. We created a dichotomous variable phq_cat regarding depression status. In creating this variable, the sum of the two PHQ items was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Subsequently, phq_cat was dichotomized based on a cutoff point of 3 or higher.
 
-In data cleaning, responses of missing, don’t know, refused or inapplicable were removed for all variables of interest. Furthermore, variables were renamed to provide descriptive names and categorical variables were recoded to provide descriptions of values. Additionally, categorical variables were converted into factors. 
+**Variables:**
 
-We created a dichotomous variable phq_cat regarding depression status. In creating this variable, the sum of the two PHQ items was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
-
-The following variables were included in analyses:
+Predictor variables:
 
 * `gender`: Gender (Male, Female)
 * `age_cat`: Categorical age at interview (65 to 69, 70 to 74, 75 to 79, 80-84, 85-89, 90+)
@@ -105,9 +101,9 @@ The following variables were included in analyses:
 * `likes_living_situation`: Likes living situation (Agree a lot, Agree a little, Agree not at all)
 * `social_network_size`: Social network size (0, 1, 2, 3, 4, 5)
 
-Furthermore, the outcome variable of interest was:
+Outcome variable:
 
-* `phq_cat`: Depression (dichotomized based on total PHQ-2 score)
+* `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
 #### Exploratory analysis: add link to dashboard and exploratory stats page.  
 
@@ -168,55 +164,10 @@ logit_model %>%
 ```
 
 ##### Discussion:
-The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expecations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were significant protective factors of depression compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network sizes. 
+The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network sizes. 
 
 The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factots for depression among this population.
 
 
 
-*Code for exploratory analyses RMD - kept getting error messages again when trying to knit.
-need to copy over.* - onyeka
-
-
-
-<center>
-**Summary Statistics for PHQ-2 outcome:**</center>
-```{r}
-
-nhats  %>% 
- summarise(
-          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
-          "min phq-2" = min(phq.total, na.rm = TRUE),
-          "med phq-2" = median(phq.total, na.rm = TRUE),
-          "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
-```
-
-**Frequency of depression within this data set:**
-
-```{r, echo=FALSE, message=FALSE}
-nhats  %>% group_by(phq_cat) %>% 
- summarise(
-         frequency = n()
-         ) %>%  knitr::kable()
-```
-
-**Race/ ethnicity frequency table**
-
-```{r, echo=FALSE, message=FALSE}
-nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
- summarise(
-         frequency = n()) %>%  
-  pivot_wider( names_from =  race_ethnicity,
-              values_from = frequency) %>%  knitr::kable()
-```
-
-**Gender frequency table**
-
-```{r, echo=FALSE, message=FALSE}
-nhats  %>% group_by(phq_cat, gender) %>% 
- summarise(
-         frequency = n()) %>%  
-  pivot_wider( names_from =  gender,
-              values_from = frequency) %>%  knitr::kable()
-```
 
