@@ -18,7 +18,7 @@ of daily life are carried out, the social, physical, and technological environme
 in valued activities. The NHATS data was first collected in 2011 and the Round 5 data collected in 2015 was the replenishment of the sample set to correctly represent the older Medicare population (NHATS User guide).
 
 
-For the purposes of this study we used data from Round 5 and included the variables ID, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, whether or not they have no one to talk to, self reported memory issues causing problems, self-rated health, and whether they are happy with their living situation. 
+For the purposes of this study we used data from Round 5 and included the variables ID, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, self rated memory , self-rated health, and whether they are happy with their living situation. 
 
 In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
 
@@ -37,7 +37,7 @@ The following variables will be included in analyses:
 
 The outcome variable of interest is:
 
-*`PHQ-cat`: Depression (dichotomized based on total PHQ-2 score)
+* `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
 ```{r nhats, include = FALSE}
 nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
@@ -78,7 +78,7 @@ nhats = nhats %>%
     likes_living_situation = factor(likes_living_situation, c("Agree a lot", "Agree a little", 
                     "Agree not at all")),
     ) %>% 
-    rename(social_network_size = sn5dnumsn)
+  rename(social_network_size = sn5dnumsn)
 ```
 
 Preliminary exploratory visualizations of the three demographic variables, gender, age, and race/ethnicity, to illustrate the frequencies per category. 
