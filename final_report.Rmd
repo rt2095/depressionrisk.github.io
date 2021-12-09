@@ -119,7 +119,7 @@ Visualizations, summaries, and exploratory statistical analyses. Justify the ste
 
 - Figure 3: Plotting social network  by phq_cat:
 
-- Figure 4: Plotting health condition by phq_cat
+- Figure 4: Plotting health condition by phq_cat:
 
 - Figure 5: Self rated memory and depression categories 
 
