@@ -126,28 +126,27 @@ Visualizations, summaries, and exploratory statistical analyses. Justify the ste
 
 
 <center> 
- **Results**: 
- are we adjusting for? </center> 
- 
+ **Results**: </center> 
  
 Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
 <center>
 **OR Interpretations** </center>
 
 ##### Risks factors:
- *Overall health condition*: Those who responded as "Poor" when asked about their overall health condition had **11 times** the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
 
- *Self-rate memory*: Those who responded as "Poor" when asked to rate their memory had 1.8 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
+ *Overall health condition*: Those who responded as "Poor" when asked about their overall health condition had **11 times** the increased odds of elevated depression risk compared to those who responded as "Excellent", adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, social network size, and living situation. 
+
+ *Self-rated memory*: Those who responded as "Poor" when asked to rate their memory had 1.8 times the increased odds of elevated depression risk compared to those who responded as "Excellent", adjusting for gender, age category, race/ethnicity, assistive device use, overall health condiiton, social network size, and living situation. 
  
- *Assistive device*: Those who responded "yes" to using a cane, walker, or wheelchair had 1.5 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "No". 
+ *Assistive device*: Those who responded "yes" to using a cane, walker, or wheelchair had 1.5 times the increased odds of elevated depression risk compared to those who responded as "No", adjusting for gender, age category, race/ethnicity, self-rated memory, overall health condition, social network size, and living situation. 
  
- *Living situation*: Those who responded with "Agree NOT at all" when asked if they liked their currenty living situation had approximatley 3.1 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Agree a lot". 
+ *Living situation*: Those who responded with "Agree NOT at all" when asked if they liked their current living situation had approximately 3.1 times the increased odds of elevated depression risk compared to those who responded as "Agree a lot", adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, overall health condition, and social network size. 
  
 #####  Protective factors:
 
- *Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to respondents who were age categories 65 to 69. 
+ *Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of elevated depression risk compared to respondents who were age categories 65 to 69, adjusting for gender, race/ethnicity, assistive device use, self-rated memory, overall health condition, social network size, and living situation. 
  
- *Race*: Non Hispanic White respondents had 24.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to Black respondents.
+ *Race*: Non Hispanic White respondents had 24.7% decreased odds of elevated depression risk compared to Black respondents, adjusting for gender, age category, assistive device use, self-rated memory, overall health condition, social network size, and living situation.
  
 
  
