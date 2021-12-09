@@ -179,7 +179,7 @@ need to copy over.* - onyeka
 
 <center>
 **Summary Statistics for PHQ-2 outcome:**</center>
-```{r}
+```{r ,echo=FALSE}
 
 nhats  %>% 
  summarise(
