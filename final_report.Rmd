@@ -86,13 +86,11 @@ Most of our questions were related to defining our research question and transsl
 **Source**: National Health and Aging Trends Study from Johns Hopkins and Westat.
 
 **Methods and data cleaning**: 
-Using only round 5 data, included ID variable, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4). 
+We used data from Round 5 and included the ID variable, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, self-rated memory, self-rated health, and whether they are happy with their living situation. In data cleaning, responses of missing, don’t know, refused or inapplicable were removed for all variables of interest. Furthermore, variables were renamed to provide descriptive names and categorical variables were recoded to provide descriptions of values. Additionally, categorical variables were converted into factors. We created a dichotomous variable phq_cat regarding depression status. In creating this variable, the sum of the two PHQ items was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Subsequently, phq_cat was dichotomized based on a cutoff point of 3 or higher.
 
-In data cleaning, responses of missing, don’t know, refused or inapplicable were removed for all variables of interest. Furthermore, variables were renamed to provide descriptive names and categorical variables were recoded to provide descriptions of values. Additionally, categorical variables were converted into factors. 
+**Variables:**
 
-We created a dichotomous variable phq_cat regarding depression status. In creating this variable, the sum of the two PHQ items was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
-
-The following variables were included in analyses:
+Predictor variables:
 
 * `gender`: Gender (Male, Female)
 * `age_cat`: Categorical age at interview (65 to 69, 70 to 74, 75 to 79, 80-84, 85-89, 90+)
@@ -103,9 +101,9 @@ The following variables were included in analyses:
 * `likes_living_situation`: Likes living situation (Agree a lot, Agree a little, Agree not at all)
 * `social_network_size`: Social network size (0, 1, 2, 3, 4, 5)
 
-Furthermore, the outcome variable of interest was:
+Outcome variable:
 
-* `phq_cat`: Depression (dichotomized based on total PHQ-2 score)
+* `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
 #### Exploratory analysis: add link to dashboard and exploratory stats page.  
 
