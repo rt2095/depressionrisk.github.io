@@ -1,5 +1,5 @@
 ---
-title: "Predictors of Depression Risk in Older Adults "
+title: <center> Predictors of Depression Risk in Older Adults  </center>
 output: 
   html_document:
     toc: true
@@ -9,3 +9,16 @@ output:
 
 
 
+### Introduction:
+
+Previous literature has examined a wide range of risk factors for depression in
+older adults. Older age, female gender, isolation, and physical health
+have all be found to be risk factors for depression in older adults
+(Sözeri-Varma). Memory issues and disorders affecting cognition are also
+associated with depression risk (Köhler et al, 2010). Depression risk in
+older adults is also associated with race and ethnicity, with evidence
+certain groups have a higher risk of depression (Hooker et al, 2019).
+The outcome will be the PHQ-2, which sums two variables rating mood and
+well-being on a Likert scale (validated by Kroenke et al, 2003).
+
+Click [here](final_report.html) to see the full project report! 
