@@ -13,18 +13,14 @@ library(plotly)
 ```
 
 ### Round 5 NHATS Dataset and relevant variables
+
 The National Health and Aging Trends Study (NHATS) is a country-wide survey program that collects information on a nationally representative sample of Medicare beneficiaries aged 65 years and older.Data is collected through annual, in-person interviews to collect information on disablement and its consequences. Detailed information is collected on participants’ physical and cognitive capacity, how activities
 of daily life are carried out, the social, physical, and technological environment, and participation
 in valued activities. The NHATS data was first collected in 2011 and the Round 5 data collected in 2015 was the replenishment of the sample set to correctly represent the older Medicare population (NHATS User guide).
 
+For the purposes of this study we used data from Round 5 and included the variables ID, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4). Variables were renamed during data cleaning. Furthermore, categorical variables were recoded to include descriptions of values and converted into factors. In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
 
-For the purposes of this study we used data from Round 5 and included the variables ID, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, self rated memory , self-rated health, and whether they are happy with their living situation. 
-
-In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
-
-Categorical variables were recoded to include descriptions of values and converted into factors.
-
-The following variables will be included in analyses:
+The following variables were included in analyses:
 
 * `gender`: Gender (Male, Female)
 * `age_cat`: Categorical age at interview (65 to 69, 70 to 74, 75 to 79, 80-84, 85-89, 90+)
@@ -35,7 +31,7 @@ The following variables will be included in analyses:
 * `likes_living_situation`: Likes living situation (Agree a lot, Agree a little, Agree not at all)
 * `social_network_size`: Social network size (0, 1, 2, 3, 4, 5)
 
-The outcome variable of interest is:
+Furthermore, the outcome variable of interest was:
 
 * `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
