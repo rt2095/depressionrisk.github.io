@@ -13,9 +13,11 @@ library(rmarkdown)
 library(tidyverse)
 library(plotly)
 library(haven)
+#we should delete unnecessary packages 
 ```
 
 ```{r nhats}
+
 nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
   select(spid, hc5depresan1, hc5depresan2, r5dgender, r5d2intvrage, rl5dracehisp, md5canewlker, 
          sn5dnumsn, cg5ratememry, hc5health, wb5truestme4) %>%
@@ -55,6 +57,7 @@ nhats = nhats %>%
     likes_living_situation = factor(likes_living_situation, c("Agree a lot", "Agree a little", 
                     "Agree not at all"), ordered = TRUE)
 )
+
 ```
 
 Column {data-width=500}
@@ -81,6 +84,7 @@ ggplotly(living_plot)
 Plotting health by phq_cat:
 
 ```{r}
+
 health_phq = nhats %>% 
   filter(hc5health > 0) %>%
   ggplot(aes(x = hc5health, group = phq_cat)) + 
@@ -92,6 +96,7 @@ health_phq = nhats %>%
     scale_y_continuous(labels = scales::percent)
 
 ggplotly(health_phq)
+
 ```
 
 Column {data-width=500}
@@ -100,6 +105,7 @@ Column {data-width=500}
 ### Differences in depression outcome by self-rated memory. 
 
 ```{r}
+
 mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
   summarise(n = n()) %>% mutate(
   proportion = (n / sum(n)))
@@ -120,6 +126,7 @@ ggplotly(memory_plot)
 ### Differences in depression outcome by use of cane walker/wheelchair. 
 
 ```{r}
+
 cane_walker_wc_plot = nhats %>%  
     group_by(phq_cat, cane_walker_wheelchair) %>% 
     summarise(n = n()) %>%  
@@ -136,4 +143,5 @@ cane_walker_wc_plot =
     scale_y_continuous(labels = scales::percent)
 
   ggplotly(cane_walker_wc_plot)
+  
 ```
