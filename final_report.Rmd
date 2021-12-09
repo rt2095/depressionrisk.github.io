@@ -170,4 +170,53 @@ logit_model %>%
 ##### Discussion:
 The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expecations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were significant protective factors of depression compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network sizes. 
 
-The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factots for depression among this population. 
+The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factots for depression among this population.
+
+
+
+*Code for exploratory analyses RMD - kept getting error messages again when trying to knit.
+need to copy over.* - onyeka
+
+
+
+<center>
+**Summary Statistics for PHQ-2 outcome:**</center>
+```{r}
+
+nhats  %>% 
+ summarise(
+          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
+          "min phq-2" = min(phq.total, na.rm = TRUE),
+          "med phq-2" = median(phq.total, na.rm = TRUE),
+          "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
+```
+
+**Frequency of depression within this data set:**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat) %>% 
+ summarise(
+         frequency = n()
+         ) %>%  knitr::kable()
+```
+
+**Race/ ethnicity frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  race_ethnicity,
+              values_from = frequency) %>%  knitr::kable()
+```
+
+**Gender frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, gender) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  gender,
+              values_from = frequency) %>%  knitr::kable()
+```
+
