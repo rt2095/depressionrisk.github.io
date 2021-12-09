@@ -20,7 +20,6 @@ navbar:
       href: https://github.com/rt2095/depressionrisk.github.io.git
 output:
   html_document:
-    css:bootstrap.min(1).css
     toc:true
     toc_float:true
     

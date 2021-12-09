@@ -368,13 +368,17 @@ div.tocify {
 <h5>Group Members:</h5>
 <p>Ifrah Fayyaz (if2282), Lydia Parr (lcp2148), Lauren Cohen (lcc2181), Onyeka Isamah (oi2142), Riddhi Thakkar (rt2640)</p>
 </div>
+<div id="introduction" class="section level4">
+<h4>Introduction:</h4>
+<p>Previous literature has examined a wide range of risk factors for depression in older adults. Older age, female gender, isolation, and physical health have all be found to be risk factors for depression in older adults (Sözeri-Varma). Memory issues and disorders affecting cognition are also associated with depression risk (Köhler et al, 2010). Depression risk in older adults is also associated with race and ethnicity, with evidence certain groups have a higher risk of depression (Hooker et al, 2019). The outcome will be the PHQ-2, which sums two variables rating mood and well-being on a Likert scale (validated by Kroenke et al, 2003).</p>
+</div>
 <div id="study-motivation-and-goals" class="section level4">
 <h4>Study motivation and goals</h4>
 <p>The motivation for this project is to identify predictors of depression outcomes among older adults. In this project, predictors of interest are gender, age, race/ethnic group, whether respondent uses an assistive device (cane, a walker, or a wheelchair), self-rated memory, overall health condition, whether the respondent likes their living situation, and the respondents social network size. Older adults were chosen as the target population since we know that they are a population that is known to have higher risk of depression compared to the general population. Publications that have studied the associations of these specific predictor variables and depression outcomes were also the inspiration of this project.</p>
 </div>
 <div id="initial-questions" class="section level4">
 <h4>Initial questions</h4>
-<p>Initially, we wanted to see what variables had an effect on quality of life within our population in the dataset. We needed to get more specific about our analyses plan, so we had to ask questions as to the best variables to include and the best methods to manipulate and define them. For example, we asked ourselves how we would measure the depression outcome, which led to use creating a variable that would serve has the PHQ-2 measure. Our initial question also evolved as we specified exactly which predictors we wanted to explore in the analyses, as we had numerous predictors available in the data set. We also spent time considering which levels should be excluded and how to correctly order factor variables.</p>
+<p>Most of our questions were related to defining our research question and transslating our research question into methods. Initially, we wanted to see what variables had an effect on quality of life within our population in the dataset. We needed to get more specific about our analyses plan, so we had to ask questions as to the best variables to include and the best methods to manipulate and define them. For example, we asked ourselves how we would measure the depression outcome. Considering this question led to creating a new variable that would serve has the PHQ-2 measure. Since there were a number of possible predictors available in the data set, we had to evolve our initial question by specifying which predictors we wanted to explore in the analyses. We also spent time considering which levels should be excluded and how to correctly order factor variables.</p>
 </div>
 <div id="data" class="section level4">
 <h4>Data</h4>
@@ -408,12 +412,24 @@ div.tocify {
 </ul>
 </div>
 <div id="additional-analyses-multivariable-logistic-regression" class="section level4">
-<h4>Additional analyses: multivariable logistic regression</h4>
-<p><strong>Results</strong>: are we adjusting for?</p>
-<p>Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.</p>
-<p><em>OR Interpretations, Age</em>: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to respondents who were age categories 65 to 69.</p>
-<p><em>OR Interpretations, Race</em>: Non Hispanic White respondents had 24.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to Black respondents.</p>
-<p><em>OR Interpretations, Overall health condition</em>Those who responded as “Fair” when asked about their overall health condition had 1.5 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as “Excellent”.</p>
+<h4>Additional analyses: Multivariable logistic regression</h4>
+<center>
+<strong>Results</strong>: are we adjusting for?
+</center>
+Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
+<center>
+<strong>OR Interpretations</strong>
+</center>
+<div id="risks-factors" class="section level5">
+<h5>Risks factors:</h5>
+<p><em>Overall health condition</em>: Those who responded as “Poor” when asked about their overall health condition had <strong>11 times</strong> the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as “Excellent”.</p>
+<p><em>Self-rate memory</em>: Those who responded as “Poor” when asked to rate their memory had 1.8 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as “Excellent”.</p>
+<p><em>Assistive device</em>: Those who responded “yes” to using a cane, walker, or wheelchair had 1.5 times the increased odds of of scoring a 3 or more on the PHQ-2 compared to those who responded as “No”.</p>
+</div>
+<div id="protective-factors" class="section level5">
+<h5>Protective factors:</h5>
+<p><em>Age</em>: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to respondents who were age categories 65 to 69.</p>
+<p><em>Race</em>: Non Hispanic White respondents had 24.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to Black respondents.</p>
 <table>
 <thead>
 <tr class="header">
@@ -558,6 +574,7 @@ div.tocify {
 </tr>
 </tbody>
 </table>
+</div>
 <div id="discussion-what-were-your-findings-are-they-what-you-expect-what-insights-into-the-data-can-you-make" class="section level5">
 <h5><strong>Discussion</strong>: What were your findings? Are they what you expect? What insights into the data can you make?</h5>
 </div>

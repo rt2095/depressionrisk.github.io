@@ -73,11 +73,14 @@ Ifrah Fayyaz (if2282), Lydia Parr (lcp2148), Lauren Cohen (lcc2181), Onyeka Isam
 
 
 
+#### Introduction:
+Previous literature has examined a wide range of risk factors for depression in older adults. Older age, female gender, isolation, and physical health have all be found to be risk factors for depression in older adults (Sözeri-Varma). Memory issues and disorders affecting cognition are also associated with depression risk (Köhler et al, 2010). Depression risk in older adults is also associated with race and ethnicity, with evidence certain groups have a higher risk of depression (Hooker et al, 2019). The outcome will be the PHQ-2, which sums two variables rating mood and well-being on a Likert scale (validated by Kroenke et al, 2003).
+
 #### Study motivation and goals
 The motivation for this project is to identify predictors of depression outcomes among older adults. In this project, predictors of interest are gender, age, race/ethnic group, whether respondent uses an assistive device (cane, a walker, or a wheelchair), self-rated memory, overall health condition, whether the respondent likes their living situation, and the respondents social network size. Older adults were chosen as the target population since we know that they are a population that is known to have higher risk of depression compared to the general population. Publications that have studied the associations of these specific predictor variables and depression outcomes were also the inspiration of this project. 
 
 #### Initial questions
-Initially, we wanted to see what variables had an effect on quality of life within our population in the dataset. We needed to get more specific about our analyses plan, so we had to ask questions as to the best variables to include and the best methods to manipulate and define them. For example, we asked ourselves how we would measure the depression outcome, which led to use creating a variable that would serve has the PHQ-2 measure. Our initial question also evolved as we specified exactly which predictors we wanted to explore in the analyses, as we had numerous predictors available in the data set. We also spent time considering which levels should be excluded and how to correctly order factor variables. 
+Most of our questions were related to defining our research question and transslating our research question into methods. Initially, we wanted to see what variables had an effect on quality of life within our population in the dataset. We needed to get more specific about our analyses plan, so we had to ask questions as to the best variables to include and the best methods to manipulate and define them. For example, we asked ourselves how we would measure the depression outcome. Considering this question led to creating a new variable that would serve has the PHQ-2 measure. Since there were a number of possible predictors available in the data set, we had to evolve our initial question by specifying which predictors we wanted to explore in the analyses. We also spent time considering which levels should be excluded and how to correctly order factor variables. 
 
 #### Data 
 **Source**: National Health and Aging Trends Study
@@ -120,22 +123,51 @@ Visualizations, summaries, and exploratory statistical analyses. Justify the ste
 - Figure 5: Self rated memory and depression categories 
 
 - Figure 6: Use of assistive devices (cane, walker, wheelchair) and depression outcomes (PHQ-2)
+```{r, eval=FALSE, echo=FALSE}
+cane_walker_wc_plot = nhats %>%  
+    group_by(phq_cat, cane_walker_wheelchair) %>% 
+    summarise(n = n()) %>% mutate(proportion = (n / sum(n)))
+
+cane_walker_wc_plot = 
+  cane_walker_wc_plot %>%  
+  ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
+  geom_col(fill= "light blue") + facet_grid(~phq_cat)+
+  labs( title = "Use of cane walker wheelchair and depression outcomes",
+      x = "Asked if used a cane walker wheel chair", y = " Proportion of respondents")+  
+    scale_x_discrete(
+      labels = c("Yes","No")) + 
+    scale_y_continuous(labels = scales::percent)
+
+  ggplotly(cane_walker_wc_plot)
+```
 
 
-####  Additional analyses: multivariable logistic regression
+####  Additional analyses: Multivariable logistic regression
 
- **Results**: are we adjusting for?
+
+<center> 
+ **Results**: 
+ are we adjusting for? </center> 
  
  
 Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
+<center>
+**OR Interpretations** </center>
 
- *OR Interpretations, Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to respondents who were age categories 65 to 69. 
+##### Risks factors:
+ *Overall health condition*: Those who responded as "Poor" when asked about their overall health condition had **11 times** the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
+
+ *Self-rate memory*: Those who responded as "Poor" when asked to rate their memory had 1.8 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
  
- *OR Interpretations, Race*: Non Hispanic White respondents had 24.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to Black respondents.
+ *Assistive device*: Those who responded "yes" to using a cane, walker, or wheelchair had 1.5 times the increased odds of  of scoring a 3 or more on the PHQ-2 compared to those who responded as "No". 
  
- *OR Interpretations, Overall health condition*Those who responded as "Fair" when asked about their overall health condition had 1.5 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
+#####  Protective factors:
+
+ *Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to respondents who were age categories 65 to 69. 
  
+ *Race*: Non Hispanic White respondents had 24.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to Black respondents.
  
+
  
 ```{r, echo=FALSE}
 logit_model = nhats %>%
