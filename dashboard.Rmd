@@ -62,47 +62,15 @@ Column {data-width=500}
 
 ### Participant view of living situation predictor against PHQ-2, stratified by race (EM)
 ```{r}
-ll_white = 
-  nhats %>%   
-  filter(race_ethnicity == "White, non-hispanic" ) %>% 
-  plot_ly(x = ~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1), type = "scatter", 
-          mode = "markers", marker = list(color = "red")) %>% 
-  layout(plot_bgcolor = "fffefa") 
+living_plot = nhats %>% 
+  ggplot(aes(x = likes_living_situation, y = phq.total, color = race_ethnicity)) + 
+  geom_point(position = "jitter", size = 0.5) + 
+  labs(title = "View of living situation and PHQ-2 score distribution",
+       x = "Likes living situation", y = "PHQ-2 score") + 
+  facet_grid(rows = vars(race_ethnicity)) + 
+  theme(legend.position = "none")
 
-ll_black = 
-  nhats %>%   
-  filter(race_ethnicity == "Black, non-hispanic" ) %>% 
-  plot_ly(x = ~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1), type = "scatter", 
-          mode = "markers", marker = list(color = "blue")) %>% 
-  layout(plot_bgcolor = "fffefa") 
-
-ll_other = 
-  nhats %>%   
-  filter(race_ethnicity == "Other, non-hispanic" ) %>% 
-  plot_ly(x = ~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1),  type = "scatter", 
-          mode = "markers", marker = list(color = "green")) %>% 
-  layout(plot_bgcolor = "fffefa") 
-
-ll_hisp = 
-  nhats %>%   
-  filter(race_ethnicity == "Hispanic" ) %>% 
-  plot_ly(x = c~jitter(wb5truestme4, 1), y = ~jitter(phq.total, 1), type = "scatter", 
-          mode = "markers", marker = list(color = "orange")) %>% 
-  layout(plot_bgcolor = "fffefa") 
-
-
-ll_scatter = subplot(ll_white, ll_black, ll_other, ll_hisp, nrows = 4, shareX = TRUE, shareY = TRUE) %>%
-  layout(xaxis = list(
-    title = "Likes Living Situation", 
-    nticks = 3), 
-    ticktext = list("Agree a lot", "Agree a little", "Agree not at all"),
-    tickvals = list(1, 2, 3), 
-         yaxis = list(title = "PHQ-2"),
-         title = list(text = "Participant view of living situation and PHQ-2 score distribution"), 
-         titlefont = list(size = 14),
-    showlegend=FALSE) # legend will have to be emulated with "annotations" indicating categories of each subplot
-       
-ll_scatter 
+ggplotly(living_plot)
 ```
 
 ### Differences in depression outcome by social network.
