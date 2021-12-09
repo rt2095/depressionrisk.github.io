@@ -1,5 +1,5 @@
 ---
-title: <center> P8105 - Final Project Report </center>
+title: "P8105 - Final Project Report"
 output: 
   html_document:
     toc: true
@@ -11,24 +11,18 @@ library(haven)
 library(tidyverse)
 library(plotly)
 
-
 knitr::opts_chunk$set(
   fig.width = 6,
   fig.asp = .6,
-  out.width = "90%"
-)
+  out.width = "90%")
 
 theme_set(theme_minimal() + theme(legend.position = "bottom"))
-
 options(
   ggplot2.continuous.colour = "viridis",
-  ggplot2.continuous.fill = "viridis"
-)
-
+  ggplot2.continuous.fill = "viridis")
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
-
 
 ```{r, echo=FALSE}
 nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
@@ -71,24 +65,37 @@ nhats = nhats %>%
     ) %>% 
     rename(social_network_size = sn5dnumsn)
 ```
-<center>
+
 ### Assessing predictors of depression risk in older adults
-
-
 
 ##### Group Members:
 Ifrah Fayyaz (if2282), Lydia Parr (lcp2148), Lauren Cohen (lcc2181), Onyeka Isamah (oi2142), Riddhi Thakkar (rt2640) 
 
-</center> 
 
 
-#### Study motivation and goals: 
+#### Study motivation and goals
+The motivation for this project is to identify predictors of depression outcomes among older adults. In this project, predictors of interest are gender, age, race/ethnic group, whether respondent uses an assistive device (cane, a walker, or a wheelchair), self-rated memory, overall health condition, whether the respondent likes their living situation, and the respondents social network size. Older adults were chosen as the target population since we know that they are a population that is known to have higher risk of depression compared to the general population. Publications that have studied the associations of these specific predictor variables and depression outcomes were also the inspiration of this project. 
 
-The motivation for this project is to identify predictors of depression outcomes among older adults. Predictors in this project are:
+#### Initial questions
+Initially, we wanted to see what variables had an effect on quality of life within our population in the dataset. We needed to get more specific about our analyses plan, so we had to ask questions as to the best variables to include and the best methods to manipulate and define them. For example, we asked ourselves how we would measure the depression outcome, which led to use creating a variable that would serve has the PHQ-2 measure. Our initial question also evolved as we specified exactly which predictors we wanted to explore in the analyses, as we had numerous predictors available in the data set. We also spent time considering which levels should be excluded and how to correctly order factor variables. 
+
+#### Data 
+**Source**: National Health and Aging Trends Study
+from Johns Hopkins and Westat
+
+**Methods and data cleaning**: 
+Using only round 5 data, included ID variable, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, whether or not they have no one to talk to, self reported memory issues causing problems, self-rated health, and whether they are happy with their living situation. 
+
+In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
+
+Categorical variables were re-coded to include descriptions of values and converted into factors.
+
+The following variables will be included in analyses:
+
 
 * `gender`: Gender (Male, Female)
 * `age_cat`: Categorical age at interview (65 to 69, 70 to 74, 75 to 79, 80-84, 85-89, 90+)
-* `race_ethnicity`: Race and hispanic ethnicity (White, non-hispanic; Black, non-hispanic; Other, non-Hispanic; Hispanic)
+* `race_ethnicity`: Race and Hispanic ethnicity (White, non-Hispanic; Black, non-Hispanic; Other, non-Hispanic; Hispanic)
 * `cane_walker_wheelchair`: Used cane, walker, wheelchair (Yes, No)
 * `memory`: Rate your memory (Excellent, Very Good, Good, Fair, Poor)
 * `overall_health`: Overall health condition (Excellent, Very Good, Good, Fair, Poor)
@@ -98,64 +105,48 @@ The motivation for this project is to identify predictors of depression outcomes
 * The outcome variable of interest is:
 *`PHQ-cat`: Depression (dichotomized based on total PHQ-2 score)
 
-We chose older adults as the target population since they are a population that are known to have higher risk of depression compared to the general population. Paper's that studied the associations of these predictor variables and depression outcomes were also the inspiration of this paper. 
-
-
-#### Initial questions:
-We initially wanted to see if comparing various exposure groups would be signficantly associated with a respondent scoring 3 or higher on the PHQ-2 depression test for depression symptoms. 
-
-**Data**: 
-
-
-**Source**: National Health and Aging Trends Study
-from Johns Hopkins and Westat
-
-**Methods and data cleaning**: 
-Using only round 5 data, included ID variable, the two variables needed for the depression risk scale (PHQ-2), gender, age, race, whether participant uses mobility devices, size of social network, whether or not they have no one to talk to, self reported memory issues causing problems, self-rated health, and whether they are happy with their living situation. 
-
-In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
-
-Categorical variables were recoded to include descriptions of values and converted into factors.
-
-
-##### Exploratory analysis: 
+#### Exploratory analysis: add link to dashboard.  
 
 Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
 - Figure 1: Demographic frequencies:
 
-- Figure 2: Participant view of living situation and PHQ-2 score distribution
+- Figure 2: Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM)
 
 - Figure 3: Plotting social network  by phq_cat:
 
-- Figure 4: Plotting health codnition by phq_cat
+- Figure 4: Plotting health condition by phq_cat
 
 - Figure 5: Self rated memory and depression categories 
 
 - Figure 6: Use of assistive devices (cane, walker, wheelchair) and depression outcomes (PHQ-2)
-```{r, echo=FALSE, message= FALSE}
-cane_walker_wc_plot = nhats %>%  
-    group_by(phq_cat, cane_walker_wheelchair) %>% 
-    summarise(n = n()) %>%  
-    mutate(proportion = (n / sum(n)))
-
-cane_walker_wc_plot = 
-  cane_walker_wc_plot %>%  
-  ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
-  geom_col(fill= "light blue") + facet_grid(~phq_cat)+
-  labs( title = "Use of cane walker wheelchair and depression outcomes",
-      x = "Asked if used a cane walker wheel chair", y = " Proportion of respondents")+  
-    scale_x_discrete(
-      labels = c("Yes","No")) + 
-    scale_y_continuous(labels = scales::percent)
-
-  ggplotly(cane_walker_wc_plot)
-```
 
 
-##### **Additional analysis**: Multivariable logisitc regression
+####  Additional analyses: multivariable logistic regression
 
+ **Results**: are we adjusting for?
  
+ 
+Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
 
+ *OR Interpretations, Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to respondents who were age categories 65 to 69. 
+ 
+ *OR Interpretations, Race*: Non Hispanic White respondents had 24.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to Black respondents.
+ 
+ *OR Interpretations, Overall health condition*Those who responded as "Fair" when asked about their overall health condition had 1.5 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
+ 
+ 
+ 
+```{r, echo=FALSE}
+logit_model = nhats %>%
+  mutate(phq_cat = if_else(phq_cat == "Mild/No Depression", 0, 1)) %>%
+  glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
+
+logit_model %>%
+  broom::tidy() %>%
+  mutate(OR = exp(estimate)) %>%
+  select(term, betas = estimate, OR, p.value) %>%
+  knitr::kable(digits = 3)
+```
 
 ##### **Discussion**: What were your findings? Are they what you expect? What insights into the data can you make?
