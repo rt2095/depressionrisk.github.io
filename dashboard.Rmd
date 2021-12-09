@@ -63,7 +63,10 @@ Column {data-width=500}
 ### Participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
 
 ```{r}
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3b08b0734821196a9dc4482a1f6488f7ed5d5033
 living_plot = nhats %>% 
   ggplot(aes(x = likes_living_situation, y = phq.total, color = race_ethnicity)) + 
   geom_point(position = "jitter", size = 0.5) + 
@@ -73,7 +76,10 @@ living_plot = nhats %>%
   theme(legend.position = "none")
 
 ggplotly(living_plot)
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3b08b0734821196a9dc4482a1f6488f7ed5d5033
 ```
 
 ### Differences in depression outcome by social network.
