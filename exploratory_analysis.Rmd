@@ -2,5 +2,249 @@
 title: "Exploratory Analysis"
 output: html_document
 ---
+```{r include=FALSE}
+library(flexdashboard)
+library(knitr)
+library(rmarkdown)
+library(tidyverse)
+library(plotly)
+library(haven)
+```
+
+
+
+
+
+
+
+```{r nhats, echo=FALSE}
+nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
+  select(spid, hc5depresan1, hc5depresan2, r5dgender, r5d2intvrage, rl5dracehisp, md5canewlker, 
+         sn5dnumsn, cg5ratememry, hc5health, wb5truestme4) %>%
+  janitor::clean_names() %>%   
+  filter(hc5depresan1 > 0, hc5depresan2 > 0, sn5dnumsn >= 0, r5d2intvrage > 0, md5canewlker > 0, 
+         cg5ratememry > 0, hc5health > 0, wb5truestme4 > 0, rl5dracehisp < 5)
+
+nhats %>% 
+  select(hc5depresan1, hc5depresan2)  %>% 
+  rowSums(na.rm = TRUE) -> nhats$phq.total
+
+nhats = nhats %>%
+  mutate(phq.total = phq.total - 2) %>% 
+  mutate(phq_cat = if_else(phq.total < 3, "Mild/No Depression", "Moderate/Severe Depression")) %>% 
+  mutate(
+    gender = recode(r5dgender, `1` = "Male", `2` = "Female"),
+    gender = factor(gender),
+    age_cat = recode(r5d2intvrage, `1` = "65 to 69", `2` = "70 to 74", `3` = "75 to 79", 
+                 `4` = "80 to 84", `5` = "85 to 89", `6` = "90+"),
+    age_cat = factor(age_cat, levels = c("65 to 69", "70 to 74", "75 to 79", "80 to 84", 
+                  "85 to 89", "90+")),
+    race_ethnicity = recode(rl5dracehisp, `1` = "White, non-hispanic", `2` = "Black, non-hispanic", 
+                  `3` = "Other, non-hispanic", `4` = "Hispanic"),
+    race_ethnicity = factor(race_ethnicity),
+    cane_walker_wheelchair = recode(md5canewlker, `1` = "Yes", `2` = "No"),
+    cane_walker_wheelchair = factor(cane_walker_wheelchair),
+    memory = recode(cg5ratememry, `1` = "Excellent", `2` = "Very Good", `3` = "Good", 
+                    `4` = "Fair", `5` = "Poor"),
+    memory = factor(memory, c("Excellent", "Very Good", "Good", "Fair", "Poor")),
+    overall_health = recode(hc5health, `1` = "Excellent", `2` = "Very Good", `3` = "Good", 
+                    `4` = "Fair", `5` = "Poor"),
+    overall_health = factor(overall_health, levels = c("Excellent", "Very Good", "Good", "Fair", 
+                    "Poor")),
+    likes_living_situation = recode(wb5truestme4, `1` = "Agree a lot", `2` = "Agree a little", 
+                    `3` = "Agree not at all"),
+    likes_living_situation = factor(likes_living_situation, c("Agree a lot", "Agree a little", 
+                    "Agree not at all")),
+    ) %>% 
+  rename(social_network_size = sn5dnumsn)
+```
+
+
+<center>
+**Summary Statistics for PHQ-2 outcome:**</center>
+```{r ,echo=FALSE}
+
+nhats  %>% 
+ summarise(
+          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
+          "min phq-2" = min(phq.total, na.rm = TRUE),
+          "med phq-2" = median(phq.total, na.rm = TRUE),
+          "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
+```
+
+**Frequency of high depression risk within this data set:**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat) %>% 
+ summarise(
+         frequency = n()
+         ) %>%  knitr::kable()
+```
+
+**Race/ ethnicity frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  race_ethnicity,
+              values_from = frequency) %>%  knitr::kable()
+```
+
+**Gender frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, gender) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  gender,
+              values_from = frequency) %>%  knitr::kable()
+```
+
+
+
+
+
+
+Preliminary exploratory visualizations of the three demographic variables, gender, age, and race/ethnicity, to illustrate the frequencies per category. 
+
+```{r nhats_demo}
+
+gender_bar = 
+  nhats  %>%   
+  count(gender) %>% 
+  mutate(gender = fct_reorder(gender, n)) %>% 
+  plot_ly(x = ~gender, y = ~n, color = ~gender, type = "bar", colors = "viridis") 
+
+age_bar = 
+  nhats  %>%   
+  count(age_cat) %>% 
+  plot_ly(x = ~age_cat, y = ~n, color = ~age_cat, type = "bar", colors = "viridis") 
+
+race_bar = 
+  nhats  %>%   
+  count(race_ethnicity) %>% 
+  mutate(race_ethnicity = fct_reorder(race_ethnicity, n)) %>% 
+  plot_ly(x = ~race_ethnicity, y = ~n, color = ~race_ethnicity, type = "bar", colors = "viridis") %>% 
+  layout(plot_bgcolor = "f8f8f8",
+         xaxis = list(tickfont = list(size = 11)), 
+         titlefont = list(size = 16),
+         showlegend = FALSE)
+
+demo_bar = subplot(gender_bar, age_bar, race_bar, nrows = 3) %>%
+  layout(xaxis3 = list(title = "Categories"), 
+         yaxis2 = list(title = "Frequency"),
+         title = list(text = "Demographic frequencies"), 
+         titlefont = list(size = 14),
+         legend = list(font = list(size = 10)))
+
+demo_bar 
+
+```
+
+Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
+
+```{r nhats_living_situation}
+
+living_plot = nhats %>% 
+  ggplot(aes(x = likes_living_situation, y = phq.total, color = race_ethnicity)) + 
+  geom_point(position = "jitter", size = 0.5) + 
+  labs(title = "View of living situation and PHQ-2 score distribution",
+       x = "Likes living situation", y = "PHQ-2 score") + 
+  facet_grid(rows = vars(race_ethnicity)) + 
+  theme(legend.position = "none")
+
+ggplotly(living_plot)
+
+```
+
+Plotting social network (by race/gender/age_cat) and health by phq_cat:
+
+```{r}
+sn_phq = nhats %>% 
+  ggplot(aes(x = social_network_size, group = phq_cat)) + 
+    geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat = "count") +
+    geom_text(aes( label = scales::percent(round(..prop.., 3)),
+                   y = ..prop.. ), stat = "count", vjust = -.3, size = 2.5) +
+    labs(y = "Percent", fill = "SN") +
+    facet_grid(~phq_cat) +
+    scale_y_continuous(labels = scales::percent)
+
+ggplotly(sn_phq)
+
+health_phq = nhats %>% 
+  filter(hc5health > 0) %>%
+  ggplot(aes(x = overall_health, group = phq_cat)) + 
+    geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat = "count") +
+    geom_text(aes( label = scales::percent(round(..prop.., 2)),
+                   y = ..prop.. ), stat = "count", vjust = -2, size = 3) +
+    labs(y = "Percent", fill = "Overall Health") +
+    facet_grid(~phq_cat) +
+    scale_y_continuous(labels = scales::percent)
+
+ggplotly(health_phq)
+```
+
+
+####  Visualizing any differences in depression outcome by predictor, self-rated memory. 
+
+- Survey respondents were asked to rate their memory on a scale of 1-5, 1 being Excellent and 5 being Poor. This plot is a visualiztion of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by how participants rated their memory (x-axis). 
+
+```{r}
+mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
+  summarise(n = n()) %>% mutate(
+  proportion = (n / sum(n)))
+
+  memory_plot = mem_plot %>% mutate(memory = factor(memory)) %>% drop_na() %>%   
+    ggplot(aes(x = memory, y = proportion, group = phq_cat)) + geom_line(alpha = 0.4) +
+  
+    geom_point(alpha = 0.5, color = "red") + 
+    facet_grid(~phq_cat) + 
+    labs( title = "Self rated memory and depression outcomes",
+    x = "Self rated memory", y = " Proportion of respondents") +  
+    scale_y_continuous(labels = scales::percent)
+  
+ggplotly(memory_plot)
+```
+
+
+####  Visualizing any differences in depression outcome by predictor, use of cane walker wheelchair. 
+
+- Survey respondents were asked if they used a cane walker wheelchair. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by if participants responded Yes, or No (x-axis). 
+```{r}
+cane_walker_wc_plot = nhats %>%  
+    group_by(phq_cat, cane_walker_wheelchair) %>% 
+    summarise(n = n()) %>%  
+    mutate(proportion = (n / sum(n)))
+
+cane_walker_wc_plot = 
+  cane_walker_wc_plot %>%  
+  ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
+  geom_col(fill= "light blue") + facet_grid(~phq_cat)+
+  labs( title = "Use of cane walker wheelchair and depression outcomes",
+      x = "Asked if used a cane walker wheel chair", y = " Proportion of respondents")+  
+    scale_x_discrete(
+      labels = c("Yes","No")) + 
+    scale_y_continuous(labels = scales::percent)
+
+  ggplotly(cane_walker_wc_plot)
+```
+
+
+### Multivariable Logistic Regression Model:
+
+```{r}
+logit_model = nhats %>%
+  mutate(phq_cat = if_else(phq_cat == "Mild/No Depression", 0, 1)) %>%
+  glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
+
+logit_model %>%
+  broom::tidy() %>%
+  mutate(OR = exp(estimate)) %>%
+  select(term, betas = estimate, OR, p.value) %>%
+  knitr::kable(digits = 3)
+
+```
+
 
 
