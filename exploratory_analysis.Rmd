@@ -11,17 +11,7 @@ library(plotly)
 library(haven)
 ```
 
----
-title: "preliminary_data_cleaning"
-output: github_document
-always_allow_html: true
----
-
-```{r setup, include=FALSE}
-library(haven)
-library(tidyverse)
-library(plotly)
-```
+# feel free to delete anything extraneous here, I wasn't sure what this .Rmd was for 
 
 ## Importing NHATS data and selecting only relevant variables
 
