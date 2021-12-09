@@ -191,7 +191,7 @@ nhats  %>%
           "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
 ```
 
-**Frequency of depression within this data set:**
+**Frequency of high depression risk within this data set:**
 
 ```{r, echo=FALSE, message=FALSE}
 nhats  %>% group_by(phq_cat) %>% 
