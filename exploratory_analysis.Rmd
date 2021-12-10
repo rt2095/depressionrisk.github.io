@@ -59,7 +59,7 @@ nhats = nhats %>%
 
 ### Living situation
 
-Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
+Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. Proportion of higher PHQ-2 score were greater among lower satisfaction with living situations. 
 
 ```{r nhats_living_situation, echo=FALSE, warning=FALSE,message=FALSE}
 living_plot = nhats %>% 
