@@ -142,8 +142,7 @@ mem_plot %>%
     labs( title = "Self rated memory and level of depression risk",
     x = "Self rated memory", y = " Proportion of respondents") +  
     scale_y_continuous(labels = scales::percent) + 
-    theme(panel.background = element_rect(fill = "white", colour = "grey50")) 
-memory_plot
+    theme(panel.background = element_rect(fill = "white", colour = "grey50"))
 ```
 
 ### Use of cane, walker, or wheelchair
