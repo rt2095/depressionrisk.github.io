@@ -109,10 +109,12 @@ Outcome variable:
 
 We examined the frequency of elevated depression risk overall as well as within demographic subgroups. Additionally, exploratory visualizations were produced to summarize frequencies of demographic variables. Furthermore, we created visualizations to examine key predictor variables (living situation, overall health condition, social network size, self-rated memory, and assistive device use) in relation to depression risk.
 
+
+**Click [here](exploratory_analysis.html) to see the the full exploratory analyses with brief comments.**
 **Click [here](dashboard.html) to see the full dashboard**
 
 
-**Click [here](exploratory_analysis.html) to see the our full exploratory analyses**
+
 
 
 ###  Additional analyses: Multivariable logistic regression
