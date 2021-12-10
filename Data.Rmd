@@ -92,18 +92,24 @@ nhats  %>%
           "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
 ```
 
+### High Depression risk
+
 **Frequency of high depression risk within this data set:**
 
-```{r, echo=FALSE, message=FALSE}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 nhats  %>% group_by(phq_cat) %>% 
  summarise(
          frequency = n()
          ) %>%  knitr::kable()
 ```
 
+### Demographic Frequencies
+
 **Race/ ethnicity frequency table**
 
-```{r, echo=FALSE, message=FALSE}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
  summarise(
          frequency = n()) %>%  
@@ -113,7 +119,8 @@ nhats  %>% group_by(phq_cat, race_ethnicity) %>%
 
 **Gender frequency table**
 
-```{r, echo=FALSE, message=FALSE}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 nhats  %>% group_by(phq_cat, gender) %>% 
  summarise(
          frequency = n()) %>%  
@@ -122,7 +129,7 @@ nhats  %>% group_by(phq_cat, gender) %>%
 ```
 
 
-```{r nhats_demo, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 gender_bar = 
   nhats  %>%   
   count(gender) %>% 
@@ -150,9 +157,10 @@ demo_bar = subplot(gender_bar, age_bar, race_bar, nrows = 3) %>%
          title = list(text = "Demographic frequencies"), 
          titlefont = list(size = 14),
         legend = list(font = list(size = 10)))
+
 ```
 
-```{r, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 demo_bar 
 ```
 

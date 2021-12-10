@@ -11,7 +11,7 @@
 
 
 
-<title>index.knit</title>
+<title>Regression Analysis</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -357,35 +357,166 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><center>
-What factors help to predict depression risk in older adults?
-</center></h1>
+<h1 class="title toc-ignore">Regression Analysis</h1>
 
 </div>
 
 
-<center>
-<img src = "depression-1.jpg" style = "width: 75%">
-</center>
-<br>
-<center>
-<div id="introduction" class="section level3">
-<h3>Introduction</h3>
-</center>
-<p>Previous literature has examined a <strong>wide range of risk factors for depression</strong> in older adults. Older age, female gender, isolation, and physical health have all be found to be risk factors for depression in older adults (Sözeri-Varma). Memory issues and disorders affecting cognition are also associated with depression risk (Köhler et al, 2010). Depression risk in older adults is also associated with race and ethnicity, with evidence certain groups have a higher risk of depression (Hooker et al, 2019). The outcome will be the PHQ-2, which sums two variables rating mood and well-being on a Likert scale (Kroenke et al, 2003).</p>
-<center>
-<strong>Click <a href="final_report.html">here</a> to see the full project report!</strong>
-</center>
-<p><br></p>
-<p><small></p>
-<a href="https://lccohen.github.io/"> Lauren Cohen </a>, <a href="https://ifrahf.github.io/"> Ifrah Fayyaz </a>, <a href="https://onyekv.github.io/"> Onyeka Isamah </a>, <a href="https://2148parr.github.io/"> Lydia Parr </a>, <a href="https://rt2095.github.io/"> Riddhi Thakkar </a>
-</p>
-<p style="text-align: center;">
-<p>Visualizations and analyses performed using <a href="https://rstudio.com">RStudio</a> (v1.4.1717). <br></p>
-<p style="text-align: center;">
-<p>Additional interactivity added using <a href="https://plot.ly/">plotly</a> (v4.13.0)</p>
-<p style="text-align: center;">
-<p><a href="https://www.nhats.org/researcher/nhats">Click here</a> to see publicly available dataset for National Health and Aging Trends Study.</p>
+<div id="multivariable-logistic-regression-model" class="section level3">
+<h3>Multivariable Logistic Regression Model</h3>
+<pre class="r"><code>logit_model = nhats %&gt;%
+  mutate(phq_cat = if_else(phq_cat == &quot;Mild/No Depression&quot;, 0, 1)) %&gt;%
+  glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = &quot;binomial&quot;, data = .) 
+
+logit_model %&gt;%
+  broom::tidy() %&gt;%
+  mutate(OR = exp(estimate)) %&gt;%
+  select(term, betas = estimate, OR, p.value) %&gt;%
+  knitr::kable(digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">betas</th>
+<th align="right">OR</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">-3.030</td>
+<td align="right">0.048</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">genderMale</td>
+<td align="right">-0.126</td>
+<td align="right">0.881</td>
+<td align="right">0.131</td>
+</tr>
+<tr class="odd">
+<td align="left">age_cat70 to 74</td>
+<td align="right">-0.279</td>
+<td align="right">0.756</td>
+<td align="right">0.039</td>
+</tr>
+<tr class="even">
+<td align="left">age_cat75 to 79</td>
+<td align="right">-0.052</td>
+<td align="right">0.949</td>
+<td align="right">0.693</td>
+</tr>
+<tr class="odd">
+<td align="left">age_cat80 to 84</td>
+<td align="right">-0.261</td>
+<td align="right">0.770</td>
+<td align="right">0.064</td>
+</tr>
+<tr class="even">
+<td align="left">age_cat85 to 89</td>
+<td align="right">-0.311</td>
+<td align="right">0.733</td>
+<td align="right">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">age_cat90+</td>
+<td align="right">-0.410</td>
+<td align="right">0.664</td>
+<td align="right">0.024</td>
+</tr>
+<tr class="even">
+<td align="left">race_ethnicityHispanic</td>
+<td align="right">0.172</td>
+<td align="right">1.187</td>
+<td align="right">0.270</td>
+</tr>
+<tr class="odd">
+<td align="left">race_ethnicityOther, non-hispanic</td>
+<td align="right">0.250</td>
+<td align="right">1.284</td>
+<td align="right">0.248</td>
+</tr>
+<tr class="even">
+<td align="left">race_ethnicityWhite, non-hispanic</td>
+<td align="right">-0.284</td>
+<td align="right">0.753</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="odd">
+<td align="left">cane_walker_wheelchairYes</td>
+<td align="right">0.407</td>
+<td align="right">1.503</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">memoryVery Good</td>
+<td align="right">0.047</td>
+<td align="right">1.048</td>
+<td align="right">0.790</td>
+</tr>
+<tr class="odd">
+<td align="left">memoryGood</td>
+<td align="right">0.065</td>
+<td align="right">1.067</td>
+<td align="right">0.701</td>
+</tr>
+<tr class="even">
+<td align="left">memoryFair</td>
+<td align="right">0.437</td>
+<td align="right">1.549</td>
+<td align="right">0.013</td>
+</tr>
+<tr class="odd">
+<td align="left">memoryPoor</td>
+<td align="right">0.611</td>
+<td align="right">1.842</td>
+<td align="right">0.006</td>
+</tr>
+<tr class="even">
+<td align="left">overall_healthVery Good</td>
+<td align="right">0.392</td>
+<td align="right">1.480</td>
+<td align="right">0.074</td>
+</tr>
+<tr class="odd">
+<td align="left">overall_healthGood</td>
+<td align="right">0.897</td>
+<td align="right">2.453</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">overall_healthFair</td>
+<td align="right">1.444</td>
+<td align="right">4.236</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">overall_healthPoor</td>
+<td align="right">2.400</td>
+<td align="right">11.019</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">likes_living_situationAgree a little</td>
+<td align="right">0.724</td>
+<td align="right">2.064</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">likes_living_situationAgree not at all</td>
+<td align="right">1.134</td>
+<td align="right">3.108</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">social_network_size</td>
+<td align="right">-0.028</td>
+<td align="right">0.973</td>
+<td align="right">0.379</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
