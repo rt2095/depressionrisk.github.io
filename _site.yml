@@ -9,8 +9,6 @@ navbar:
       href: exploratory_analysis.html
     - text: "Dashboard"
       href: dashboard.html
-    - text: "Regression Analysis"
-      href: regression.html
   right:
     - text: "Project Report"
       href: final_report.html
