@@ -78,21 +78,9 @@ nhats = nhats %>%
 Preliminary exploratory visualizations of the three demographic variables, gender, age, and race/ethnicity, to illustrate the frequencies per category. 
 
 
-<center>
-**Summary Statistics for PHQ-2 outcome:**</center>
-```{r ,echo=FALSE}
+### Elevated Depression risk
 
-nhats  %>% 
- summarise(
-          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
-          "min phq-2" = min(phq.total, na.rm = TRUE),
-          "med phq-2" = median(phq.total, na.rm = TRUE),
-          "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
-```
-
-### High Depression risk
-
-**Frequency of high depression risk within this data set:**
+**Frequency of elevated depression risk within this data set:**
 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
