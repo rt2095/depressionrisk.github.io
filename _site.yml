@@ -13,7 +13,7 @@ navbar:
     - text: "Project Report"
       href: final_report.html
     - icon: fa-play-circle fa-sm
-      href: mailto:<rt2640@cumc.columbia.edu>
+      href: https://www.youtube.com/watch?v=_7he1c-ELK0&ab_channel=IfrahFayyaz
     - icon: fa-github fa-lg
       href: https://github.com/rt2095/depressionrisk.github.io.git
 output:
