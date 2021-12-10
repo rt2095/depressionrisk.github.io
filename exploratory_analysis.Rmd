@@ -79,6 +79,7 @@ ggplotly(living_plot)
 Plotting social network (by race/gender/age_cat) and health by phq_cat:
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE}
+
 sn_phq = nhats %>% 
   ggplot(aes(x = social_network_size, group = phq_cat)) + 
     geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat = "count") +
