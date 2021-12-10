@@ -142,9 +142,9 @@ ggplotly(memory_plot)
 
 ### Use of cane walker or wheelchair
 
-####  Visualizing any differences in depression outcome by predictor, use of cane walker wheelchair. 
+####  Visualizing any differences in depression outcome by predictor, use of assistive devices (cane, walker, wheelchair). 
 
-- Survey respondents were asked if they used a cane walker wheelchair. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by if participants responded Yes, or No (x-axis). 
+- Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is stratified by if participants responded Yes, or No (x-axis) using a cane, walker, or wheelchare. There doesn't appear to be a difference in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
 
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE, fig.align='center'}
@@ -166,7 +166,5 @@ cane_walker_wc_plot =
 
   ggplotly(cane_walker_wc_plot)
 ```
-
-
 
 
