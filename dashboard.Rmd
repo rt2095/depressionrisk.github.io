@@ -31,7 +31,7 @@ nhats %>%
 
 nhats = nhats %>%
   mutate(phq.total = phq.total - 2) %>% 
-  mutate(phq_cat = if_else(phq.total < 3, "Mild/No Depression", "Moderate/Severe Depression")) %>% 
+  mutate(phq_cat = if_else(phq.total < 3, "Low Depression Risk", "Elevated Depression Risk")) %>% 
   mutate(
     gender = recode(r5dgender, `1` = "Male", `2` = "Female"),
     gender = factor(gender),
@@ -63,7 +63,7 @@ nhats = nhats %>%
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
+### Participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. Proportion of higher PHQ-2 score were greater among lower satisfaction with living situations. 
 
 ```{r}
 
@@ -79,9 +79,7 @@ ggplotly(living_plot)
 
 ```
 
-### Differences in depression outcome by social network.
-
-Plotting health by phq_cat:
+### Differences in depression outcome by social network, plotting health by phq_cat:
 
 ```{r}
 

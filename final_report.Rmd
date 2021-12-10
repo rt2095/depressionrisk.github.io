@@ -105,21 +105,18 @@ Outcome variable:
 
 * `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
+<<<<<<< HEAD
 ### Exploratory analysis: add link to dashboard and exploratory stats page.  
+=======
+#### Exploratory analysis:   
+Summary:
+>>>>>>> ead2bcfab08b897e694c1623c5883a78ceedaf9c
 
-Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
-- Figure 1: Demographic frequencies:
+**Click [here](dashboard.html) to see the full dashboard**
 
-- Figure 2: Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM)
 
-- Figure 3: Plotting social network  by phq_cat:
-
-- Figure 4: Plotting health condition by phq_cat:
-
-- Figure 5: Self rated memory and depression categories 
-
-- Figure 6: Use of assistive devices (cane, walker, wheelchair) and depression outcomes (PHQ-2)
+**Click [here](exploratory_analysis.html) to see the our full exploratory analyses**
 
 
 ###  Additional analyses: Multivariable logistic regression
@@ -127,11 +124,11 @@ Visualizations, summaries, and exploratory statistical analyses. Justify the ste
 
 <center> 
  **Results**: 
- are we adjusting for? </center> 
- 
+</center> 
  
 Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
 <center>
+
 **OR Interpretations** </center>
 
 #### Risks factors:
@@ -167,7 +164,4 @@ logit_model %>%
 The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network sizes. 
 
 The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factots for depression among this population.
-
-
-
 
