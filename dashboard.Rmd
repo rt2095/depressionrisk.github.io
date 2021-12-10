@@ -63,7 +63,7 @@ nhats = nhats %>%
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. Proportion of higher PHQ-2 score were greater among lower satisfaction with living situations. 
+### Figure 1: Participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
 
 ```{r}
 
@@ -79,7 +79,7 @@ ggplotly(living_plot)
 
 ```
 
-### Differences in depression outcome by social network (stratified by gender) and perceived overall health:
+###  Figure 2: Differences in depression outcome by social network (stratified by gender) and perceived overall health:
 
 ```{r}
 sn_plot = nhats %>% group_by(phq_cat, age_cat, gender) %>% 
@@ -113,7 +113,7 @@ nhats %>%
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Differences in depression outcome by self-rated memory. 
+### Figure 3: Differences in depression outcome by self-rated memory. 
 
 ```{r}
 
@@ -134,7 +134,7 @@ ggplotly(memory_plot)
 
 ```
 
-### Differences in depression outcome by use of cane walker/wheelchair. 
+### Figure 4: Differences in depression outcome by use of cane, walker/wheelchair. 
 
 ```{r}
 
@@ -148,7 +148,7 @@ cane_walker_wc_plot =
   ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
   geom_col(fill= "light blue") + facet_grid(~phq_cat)+
   labs( title = "Use of cane walker/wheelchair and depression outcomes",
-      x = "Asked if used a cane walker/ wheel chair", y = " Proportion of respondents")+  
+      x = "Asked if used a cane, walker/ wheel chair", y = " Proportion of respondents")+  
     scale_x_discrete(
       labels = c("Yes","No")) + 
     scale_y_continuous(labels = scales::percent)

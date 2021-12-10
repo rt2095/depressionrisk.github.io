@@ -105,21 +105,48 @@ Outcome variable:
 
 * `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
+<<<<<<< HEAD
+### Summary of exploratory analysis: 
+
+
+=======
 ### Exploratory analysis  
+>>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
 
 We examined the frequency of elevated depression risk overall as well as within demographic subgroups. Additionally, exploratory visualizations were produced to summarize frequencies of demographic variables. Furthermore, we created visualizations to examine key predictor variables (living situation, overall health condition, social network size, self-rated memory, and assistive device use) in relation to depression risk.
 
 
+
+
+
+We performed exploratory data analyses including visualizations of predictors of interest and depression risk level. Relevant findings include:
+
+- Figure 1. PHQ-2 score were greater among lower satisfaction with living situations.
+
+
+- Figure 2. Respondents who scored as low depression risk recorded their perceived overall health within the Excellent to Good range while respondents with an elevated risk of depression were more likely to report their overall health within the good to poor range.
+
+<center>
 **Click [here](exploratory_analysis.html) to see the the full exploratory analyses with brief comments.**
 
 
+<<<<<<< HEAD
+**Click [here](dashboard.html) to see the full dashboard of all visualizations created for this project.**
+=======
 **Click [here](dashboard.html) to see the full dashboard**
+>>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
+
+**Click [here](data.html) to see summary statistics, frequency tables, and demographic frequency visualizations.**
+
+</center>
+<br>
 
 
-
+<<<<<<< HEAD
 ###  Additional analyses: Multivariable logistic regression
-
+=======
 We conducted multivariable logistic regression to identify predictors of depression risk.
+>>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
 
 <center> 
  **Results**: 
@@ -128,7 +155,10 @@ We conducted multivariable logistic regression to identify predictors of depress
 Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
 <center>
 
+<br>
 **OR Interpretations** </center>
+<br>
+
 
 #### Risks factors:
  *Overall health condition*: Those who responded as "Poor" when asked about their overall health condition had **11 times** the increased odds of elevated depression risk compared to those who responded as "Excellent", adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, social network size, and living situation. 
@@ -160,7 +190,11 @@ logit_model %>%
 ```
 
 ### Discussion
-The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network sizes. 
+The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network size. 
 
+<<<<<<< HEAD
+The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected based on literature. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation are also significant risk factors for depression among this population.
+=======
 The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factors for depression among this population.
+>>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
 
