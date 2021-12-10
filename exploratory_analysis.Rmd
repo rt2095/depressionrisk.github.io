@@ -129,22 +129,21 @@ Initial observations:
 - Higher proportion of high-risk depression respondents who rated their memory as "Poor" compared to low risk depression patients who also rated their memory as "Poor". 
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE}
-mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
-  summarise(n = n()) %>% mutate(
-  proportion = (n / sum(n)))
+mem_plot = nhats %>%  
+  group_by(phq_cat, memory) %>% 
+  summarise(n = n()) %>% 
+  mutate(proportion = (n / sum(n))) %>%
+  mutate(memory = factor(memory)) %>% drop_na()
 
-  memory_plot = mem_plot %>% mutate(memory = factor(memory)) %>% drop_na() %>%   
-    ggplot(aes(x = memory, y = proportion, group = phq_cat)) + geom_line(alpha = 0.4) +
-  
-    geom_point(alpha = 0.7, color = "light blue") + 
+mem_plot %>%        
+    ggplot(aes(x = memory, y = proportion, group = phq_cat)) + geom_line(alpha = 0.7, color = "#440154FF") +
+    geom_point(alpha = 1.2, color = "#FDE725FF") + 
     facet_grid(~phq_cat) + 
     labs( title = "Self rated memory and level of depression risk",
     x = "Self rated memory", y = " Proportion of respondents") +  
-    theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
-     
-    scale_y_continuous(labels = scales::percent)
-  
-ggplotly(memory_plot)
+    scale_y_continuous(labels = scales::percent) + 
+    theme(panel.background = element_rect(fill = "white", colour = "grey50")) 
+memory_plot
 ```
 
 ### Use of cane, walker, or wheelchair
@@ -159,23 +158,20 @@ Initial observations:
 - There doesn't appear to be any differences in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE, fig.align='center'}
-cane_walker_wc_plot = nhats %>%  
-    group_by(phq_cat, cane_walker_wheelchair) %>% 
-    summarise(n = n()) %>%  
-    mutate(proportion = (n / sum(n)))
+nhats %>% 
+  ggplot(aes(x = cane_walker_wheelchair, group = phq_cat)) + 
+    geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat = "count") +
+    geom_text(aes( label = scales::percent(round(..prop.., 2)),
+                   y = ..prop.. ), stat = "count", vjust = -0.5, size = 3) +
+    labs(y = "Proportion of Respondents", x = "Asked if used a cane, walker/wheel chair", fill = "Cane/Walker/Wheelchair") +
+    theme(legend.position = "none")  + theme(axis.text.x = element_text(angle = 30, vjust = 0.7)) +
+    facet_grid(~phq_cat) + scale_y_continuous(labels = scales::percent) + 
+    theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
+    scale_fill_viridis_d()
 
-cane_walker_wc_plot = 
-  cane_walker_wc_plot %>%  
-  ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
-  geom_col(fill= "light blue") + facet_grid(~phq_cat)+
-  labs( title = "Use of cane, walker, wheelchair and level of depression risk",
-      x = "Asked if used a cane, walker/wheel chair", y = " Proportion of respondents")+  
-    scale_x_discrete(
-      labels = c("Yes","No")) + 
-    scale_y_continuous(labels = scales::percent) + 
-  theme(panel.background = element_rect(fill = "white", colour = "grey50"))
 
-  ggplotly(cane_walker_wc_plot)
+
+cane_walker_wc_plot
 ```
 
 
