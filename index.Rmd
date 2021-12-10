@@ -43,4 +43,5 @@ Additional interactivity added using <a href="https://plot.ly/">plotly</a> (v4.1
 **Click <a href="https://github.com/rt2095/depressionrisk.github.io">here</a> to view our github repository for the project website.**
 The project proposal as well as initial data cleaning and exploratory analysis were done in a separate repo which can be viewed <a href="https://github.com/2148parr/p8105_final_new"> here</a>.
 
-<iframe width="1348" height="480" src="https://www.youtube.com/embed/_7he1c-ELK0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<center>
+<iframe width="800" height="480" src="https://www.youtube.com/embed/_7he1c-ELK0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </center>
