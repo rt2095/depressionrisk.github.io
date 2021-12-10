@@ -79,7 +79,7 @@ ggplotly(living_plot)
 
 ```
 
-### Differences in depression outcome by social network and gender, plotting health by phq_cat:
+### Differences in depression outcome by social network (stratified by gender) and perceived overall health:
 
 ```{r}
 sn_plot = nhats %>% group_by(phq_cat, age_cat, gender) %>% 
