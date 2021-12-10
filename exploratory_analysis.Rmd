@@ -147,26 +147,16 @@ mem_plot = nhats %>%  group_by(phq_cat, memory) %>%
 ggplotly(memory_plot)
 ```
 
-### Use of cane walker or wheelchair
+### Use of cane, walker, or wheelchair
 
 ####  Visualizing any differences in level of depression risk by predictor, use of assistive devices (cane, walker, wheelchair). 
 
-<<<<<<< HEAD
-Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their level of depression symptom risk. The figure is stratified by if participants responded Yes, or No to using a cane, walker, or wheelchir. 
-=======
 Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their level of depression symptom risk. The figure is stratified by if participants responded Yes, or No to using a cane, walker, or wheelchair. 
->>>>>>> 056087484e933d927196dbcec6dfbb3fcfba5123
 
 Initial observations:
 
-
--  A higher proportion of those who responded to using an assitive device having elevated risk for depression symptoms compared to those who responded "no" using an assistive device and have low risk of depression symptoms.
+-  A higher proportion of those who responded to using an assistive device having elevated risk for depression symptoms compared to those who responded "no" using an assistive device and have low risk of depression symptoms.
 - There doesn't appear to be any differences in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 056087484e933d927196dbcec6dfbb3fcfba5123
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE, fig.align='center'}
 cane_walker_wc_plot = nhats %>%  
