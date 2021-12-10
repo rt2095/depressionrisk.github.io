@@ -78,7 +78,7 @@ ggplotly(living_plot)
 
 #### Visualizing any differences in depression outcome by predictor, perceived overall health.
 
-- The respondents were asked to rate their overall health on a scale from 1-5 with 1 being Excellent health and 5 being poor health. The graph below illustrates the proportion of respondents rating their overall health stratified by their depression outcome (PHQ-2) status. We can observe that respondents who scored as low depression risk recorded their perceived overall health within the Excellent to Good range while respondents with elevated depression risk were more likely to report their overall health within the Good to Poor range. 
+- The respondents were asked to rate their overall health on a scale from 1-5 with 1 being Excellent health and 5 being poor health. The graph below illustrates the proportion of respondents rating their overall health stratified by their depression outcome (PHQ-2) status. We can observe that respondents who scored as Low depression risk recorded their perceived overall health within the Excellent to Good range while respondents with Elevated depression risk were more likely to report their overall health within the Good to Poor range. 
 
 ```{r, echo=FALSE}
 nhats %>% 
@@ -118,7 +118,7 @@ sn_plot %>%
 
 ### Self rated memory
 
-####  Visualizing any differences in depression outcome by predictor, self-rated memory. 
+####  Visualizing any differences in level of depression risk by predictor, self-rated memory. 
 
 - Survey respondents were asked to rate their memory on a scale of 1-5, 1 being Excellent and 5 being Poor. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Low depression risk or elevated depression risk. The figure is broken down by how participants rated their memory. 
 
@@ -138,7 +138,7 @@ mem_plot = nhats %>%  group_by(phq_cat, memory) %>%
   
     geom_point(alpha = 0.7, color = "light blue") + 
     facet_grid(~phq_cat) + 
-    labs( title = "Self rated memory and depression outcomes",
+    labs( title = "Self rated memory and level of depression risk",
     x = "Self rated memory", y = " Proportion of respondents") +  
     theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
      
@@ -149,11 +149,8 @@ ggplotly(memory_plot)
 
 ### Use of cane walker or wheelchair
 
-####  Visualizing any differences in depression outcome by predictor, use of assistive devices (cane, walker, wheelchair). 
+####  Visualizing any differences in level of depression risk by predictor, use of assistive devices (cane, walker, wheelchair). 
 
-<<<<<<< HEAD
-- Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their depression outcome status - Low Depression Risk or Elevated Depression Risk. The figure is stratified by if participants responded Yes, or No (x-axis) using a cane, walker, or wheelchare. There doesn't appear to be a difference in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
-=======
 Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their level of depression symptom risk. The figure is stratified by if participants responded Yes, or No to using a cane, walker, or wheelchir. 
 
 Initial observations:
@@ -162,7 +159,6 @@ Initial observations:
 -  A higher proportion of those who responded to using an assitive device having elevated risk for depression symptoms compared to those who responded "no" using an assistive device and have low risk of depression symptoms. T
 - There doesn't appear to be any differences in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
 
->>>>>>> c8c17fe033095c299968cbf5e1e125bfeff00fe3
 
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE, fig.align='center'}
@@ -175,7 +171,7 @@ cane_walker_wc_plot =
   cane_walker_wc_plot %>%  
   ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
   geom_col(fill= "light blue") + facet_grid(~phq_cat)+
-  labs( title = "Use of cane walker wheelchair and depression outcomes",
+  labs( title = "Use of cane, walker, wheelchair and level of depression risk",
       x = "Asked if used a cane, walker/wheel chair", y = " Proportion of respondents")+  
     scale_x_discrete(
       labels = c("Yes","No")) + 

@@ -105,13 +105,10 @@ Outcome variable:
 
 * `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
-<<<<<<< HEAD
+
 ### Summary of exploratory analysis: 
 
 
-=======
-### Exploratory analysis  
->>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
 
 We examined the frequency of elevated depression risk overall as well as within demographic subgroups. Additionally, exploratory visualizations were produced to summarize frequencies of demographic variables. Furthermore, we created visualizations to examine key predictor variables (living situation, overall health condition, social network size, self-rated memory, and assistive device use) in relation to depression risk.
 
@@ -130,11 +127,8 @@ We performed exploratory data analyses including visualizations of predictors of
 **Click [here](exploratory_analysis.html) to see the the full exploratory analyses with brief comments.**
 
 
-<<<<<<< HEAD
 **Click [here](dashboard.html) to see the full dashboard of all visualizations created for this project.**
-=======
-**Click [here](dashboard.html) to see the full dashboard**
->>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
+
 
 **Click [here](data.html) to see summary statistics, frequency tables, and demographic frequency visualizations.**
 
@@ -142,15 +136,15 @@ We performed exploratory data analyses including visualizations of predictors of
 <br>
 
 
-<<<<<<< HEAD
-###  Additional analyses: Multivariable logistic regression
-=======
-We conducted multivariable logistic regression to identify predictors of depression risk.
->>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
 
-<center> 
+###  Additional analyses: Multivariable logistic regression
+
+We conducted multivariable logistic regression to identify predictors of depression risk.
+
+
+
  **Results**: 
-</center> 
+
  
 Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
 <center>

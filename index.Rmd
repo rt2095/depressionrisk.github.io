@@ -36,7 +36,7 @@ well-being on a Likert scale (Kroenke et al, 2003).
 
 
 
-<a href="https://lccohen.github.io/"> Lauren Cohen </a>, <a href="https://ifrahf.github.io/"> Ifrah Fayyaz </a>, <a href="https://onyekv.github.io/"> Onyeka Isamah </a>, <a href="https://2148parr.github.io/"> Lydia Parr </a>, <a href="https://rt2095.github.io/"> Riddhi Thakkar </a>
+<a href="https://lccohen.github.io/"> Lauren Cohen </a>, <a href="https://ifrahf.github.io/"> Ifrah Fayyaz </a>, <a href="https://onyekv.github.io/onyekv_hw.github.io/"> Onyeka Isamah </a>, <a href="https://2148parr.github.io/"> Lydia Parr </a>, <a href="https://rt2095.github.io/"> Riddhi Thakkar </a>
 </p>
 
 <p style="text-align: center;">

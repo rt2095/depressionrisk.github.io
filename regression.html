@@ -364,24 +364,6 @@ div.tocify {
 
 <div id="multivariable-logistic-regression-model" class="section level3">
 <h3>Multivariable Logistic Regression Model</h3>
-<pre class="r"><code>logit_model = nhats %&gt;%
-  mutate(phq_cat = if_else(phq_cat == &quot;Low Depression Risk&quot;, 0, 1)) %&gt;%
-  glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = &quot;binomial&quot;, data = .) 
-
-
-logit_model %&gt;%
-  broom::tidy() %&gt;%
-  mutate(OR = exp(estimate)) %&gt;%
-  select(term, betas = estimate, OR, p.value) %&gt;%
-  mutate(term = str_replace(term, &quot;age_cat&quot;, &quot;Age Group: &quot;)) %&gt;%
-  mutate(term = str_replace(term, &quot;gender&quot;, &quot;Gender: &quot;)) %&gt;%
-  mutate(term = str_replace(term, &quot;race_ethnicity&quot;, &quot;Race: &quot;)) %&gt;%
-  mutate(term = str_replace(term, &quot;cane_walker_wheelchair&quot;, &quot;Cane Walking/Wheelchair: &quot;)) %&gt;%
-  mutate(term = str_replace(term, &quot;memory&quot;, &quot;Memory: &quot;)) %&gt;%
-  mutate(term = str_replace(term, &quot;overall_health&quot;, &quot;Overall Health: &quot;)) %&gt;%
-  mutate(term = str_replace(term, &quot;likes_living_situation&quot;, &quot;Likes Living Situation: &quot;)) %&gt;%
-  mutate(term = str_replace(term, &quot;social_network_size&quot;, &quot;Social Network Size&quot;)) %&gt;%
-  knitr::kable(digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">

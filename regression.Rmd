@@ -60,7 +60,7 @@ nhats = nhats %>%
 
 ### Multivariable Logistic Regression Model
 
-```{r,message=FALSE, warning=FALSE}
+```{r,message=FALSE, warning=FALSE, echo=FALSE}
 logit_model = nhats %>%
   mutate(phq_cat = if_else(phq_cat == "Low Depression Risk", 0, 1)) %>%
   glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
