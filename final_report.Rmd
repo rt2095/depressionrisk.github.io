@@ -105,21 +105,14 @@ Outcome variable:
 
 * `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
-#### Exploratory analysis: add link to dashboard and exploratory stats page.  
+#### Exploratory analysis:   
+Summary:
 
-Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
-- Figure 1: Demographic frequencies:
+**Click [here](dashboard.html) to see the full dashboard**
 
-- Figure 2: Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM)
 
-- Figure 3: Plotting social network  by phq_cat:
-
-- Figure 4: Plotting health condition by phq_cat:
-
-- Figure 5: Self rated memory and depression categories 
-
-- Figure 6: Use of assistive devices (cane, walker, wheelchair) and depression outcomes (PHQ-2)
+**Click [here](exploratory_analysis.html) to see the our full exploratory analyses**
 
 
 ####  Additional analyses: Multivariable logistic regression
@@ -127,11 +120,11 @@ Visualizations, summaries, and exploratory statistical analyses. Justify the ste
 
 <center> 
  **Results**: 
- are we adjusting for? </center> 
- 
+</center> 
  
 Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
 <center>
+
 **OR Interpretations** </center>
 
 ##### Risks factors:
