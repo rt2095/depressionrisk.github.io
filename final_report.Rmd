@@ -112,10 +112,12 @@ Outcome variable:
 Summary:
 
 
+
+**Click [here](exploratory_analysis.html) to see the the full exploratory analyses with brief comments.**
 **Click [here](dashboard.html) to see the full dashboard**
 
 
-**Click [here](exploratory_analysis.html) to see the our full exploratory analyses**
+
 
 
 ###  Additional analyses: Multivariable logistic regression
