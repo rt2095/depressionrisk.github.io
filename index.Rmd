@@ -12,7 +12,9 @@ output:
 
 <br>
 <center>
-### Introduction:
+
+### Introduction
+
 </center>
 Previous literature has examined a **wide range of risk factors for depression** in
 older adults. Older age, female gender, isolation, and physical health
@@ -27,3 +29,21 @@ well-being on a Likert scale (Kroenke et al, 2003).
 <center>
 **Click [here](final_report.html) to see the full project report!**
 </center>
+
+<br>
+
+<small>
+
+
+
+<a href="https://lccohen.github.io/"> Lauren Cohen </a>, <a href="https://ifrahf.github.io/"> Ifrah Fayyaz </a>, <a href="https://onyekv.github.io/"> Onyeka Isamah </a>, <a href="https://2148parr.github.io/"> Lydia Parr </a>, <a href="https://rt2095.github.io/"> Riddhi Thakkar </a>
+</p>
+
+<p style="text-align: center;">
+Visualizations and analyses performed using <a href="https://rstudio.com">RStudio</a> (v1.4.1717). <br>
+
+<p style="text-align: center;">
+Additional interactivity added using <a href="https://plot.ly/">plotly</a> (v4.13.0)
+
+<p style="text-align: center;">
+<a href="https://www.nhats.org/researcher/nhats">Click here</a> to see publicly available dataset for National Health and Aging Trends Study.

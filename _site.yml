@@ -9,12 +9,12 @@ navbar:
       href: exploratory_analysis.html
     - text: "Dashboard"
       href: dashboard.html
-    - text: "Conclusions"
-      href: conclusions.html
+    - text: "Regression Analysis"
+      href: regression.html
   right:
     - text: "Project Report"
       href: final_report.html
-    - icon: fa-envelope fa-lg
+    - icon: fa-play-circle fa-sm
       href: mailto:<rt2640@cumc.columbia.edu>
     - icon: fa-github fa-lg
       href: https://github.com/rt2095/depressionrisk.github.io.git

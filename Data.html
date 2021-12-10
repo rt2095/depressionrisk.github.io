@@ -336,7 +336,7 @@ div.tocify {
   <a href="dashboard.html">Dashboard</a>
 </li>
 <li>
-  <a href="conclusions.html">Conclusions</a>
+  <a href="regression.html">Regression Analysis</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -345,7 +345,7 @@ div.tocify {
 </li>
 <li>
   <a href="mailto:&lt;rt2640@cumc.columbia.edu&gt;">
-    <span class="fa fa-envelope fa-lg"></span>
+    <span class="fa fa-play-circle fa-sm"></span>
      
   </a>
 </li>
@@ -373,8 +373,8 @@ Data
 
 <div id="round-5-nhats-dataset-and-relevant-variables" class="section level3">
 <h3>Round 5 NHATS Dataset and relevant variables</h3>
-<p>The National Health and Aging Trends Study (NHATS) is a country-wide survey program that collects information on a nationally representative sample of Medicare beneficiaries aged 65 years and older.Data is collected through annual, in-person interviews to collect information on disablement and its consequences. Detailed information is collected on participants’ physical and cognitive capacity, how activities of daily life are carried out, the social, physical, and technological environment, and participation in valued activities. The NHATS data was first collected in 2011 and the Round 5 data collected in 2015 was the replenishment of the sample set to correctly represent the older Medicare population (NHATS User guide).</p>
-<p>For the purposes of this study we used data from Round 5 and included the variables ID, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4). Variables were renamed during data cleaning. Furthermore, categorical variables were recoded to include descriptions of values and converted into factors. In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.</p>
+<p>The National Health and Aging Trends Study (NHATS) is a country-wide survey program that collects information on a nationally representative sample of Medicare beneficiaries aged 65 years and older. Data is collected through annual, in-person interviews to collect information on disablement and its consequences. Detailed information is collected on participants’ physical and cognitive capacity, how activities of daily life are carried out, the social, physical, and technological environment, and participation in valued activities. The NHATS data was first collected in 2011 and the Round 5 data collected in 2015 was the replenishment of the sample set to correctly represent the older Medicare population (NHATS User guide).</p>
+<p>For the purposes of this study we used data from Round 5 and included the ID variable, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4). Variables were renamed during data cleaning. Furthermore, categorical variables were recoded to include descriptions of values and converted into factors. In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.</p>
 <p>The following variables were included in analyses:</p>
 <ul>
 <li><code>gender</code>: Gender (Male, Female)</li>
@@ -412,6 +412,9 @@ Data
 </tr>
 </tbody>
 </table>
+</div>
+<div id="high-depression-risk" class="section level3">
+<h3>High Depression risk</h3>
 <p><strong>Frequency of high depression risk within this data set:</strong></p>
 <table>
 <thead>
@@ -422,15 +425,18 @@ Data
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Mild/No Depression</td>
-<td align="right">5966</td>
+<td align="left">Elevated Depression Risk</td>
+<td align="right">827</td>
 </tr>
 <tr class="even">
-<td align="left">Moderate/Severe Depression</td>
-<td align="right">827</td>
+<td align="left">Low Depression Risk</td>
+<td align="right">5966</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="demographic-frequencies" class="section level3">
+<h3>Demographic Frequencies</h3>
 <p><strong>Race/ ethnicity frequency table</strong></p>
 <table>
 <thead>
@@ -444,18 +450,18 @@ Data
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Mild/No Depression</td>
-<td align="right">1170</td>
-<td align="right">300</td>
-<td align="right">151</td>
-<td align="right">4345</td>
-</tr>
-<tr class="even">
-<td align="left">Moderate/Severe Depression</td>
+<td align="left">Elevated Depression Risk</td>
 <td align="right">242</td>
 <td align="right">82</td>
 <td align="right">36</td>
 <td align="right">467</td>
+</tr>
+<tr class="even">
+<td align="left">Low Depression Risk</td>
+<td align="right">1170</td>
+<td align="right">300</td>
+<td align="right">151</td>
+<td align="right">4345</td>
 </tr>
 </tbody>
 </table>
@@ -470,20 +476,25 @@ Data
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Mild/No Depression</td>
-<td align="right">3417</td>
-<td align="right">2549</td>
-</tr>
-<tr class="even">
-<td align="left">Moderate/Severe Depression</td>
+<td align="left">Elevated Depression Risk</td>
 <td align="right">507</td>
 <td align="right">320</td>
 </tr>
+<tr class="even">
+<td align="left">Low Depression Risk</td>
+<td align="right">3417</td>
+<td align="right">2549</td>
+</tr>
 </tbody>
 </table>
+<<<<<<< HEAD
 <pre class="r"><code>demo_bar </code></pre>
 <div id="htmlwidget-a82aa0aa1f5c4a3d1a0c" style="width:672px;height:480px;" class="plotly html-widget"></div>
 <script type="application/json" data-for="htmlwidget-a82aa0aa1f5c4a3d1a0c">{"x":{"data":[{"x":["Male"],"y":[2869],"type":"bar","name":"Male","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Female"],"y":[3924],"type":"bar","name":"Female","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["65 to 69"],"y":[981],"type":"bar","name":"65 to 69","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["70 to 74"],"y":[1651],"type":"bar","name":"70 to 74","marker":{"color":"rgba(65,68,135,1)","line":{"color":"rgba(65,68,135,1)"}},"textfont":{"color":"rgba(65,68,135,1)"},"error_y":{"color":"rgba(65,68,135,1)"},"error_x":{"color":"rgba(65,68,135,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["75 to 79"],"y":[1478],"type":"bar","name":"75 to 79","marker":{"color":"rgba(42,120,142,1)","line":{"color":"rgba(42,120,142,1)"}},"textfont":{"color":"rgba(42,120,142,1)"},"error_y":{"color":"rgba(42,120,142,1)"},"error_x":{"color":"rgba(42,120,142,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["80 to 84"],"y":[1269],"type":"bar","name":"80 to 84","marker":{"color":"rgba(34,168,132,1)","line":{"color":"rgba(34,168,132,1)"}},"textfont":{"color":"rgba(34,168,132,1)"},"error_y":{"color":"rgba(34,168,132,1)"},"error_x":{"color":"rgba(34,168,132,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["85 to 89"],"y":[885],"type":"bar","name":"85 to 89","marker":{"color":"rgba(122,209,81,1)","line":{"color":"rgba(122,209,81,1)"}},"textfont":{"color":"rgba(122,209,81,1)"},"error_y":{"color":"rgba(122,209,81,1)"},"error_x":{"color":"rgba(122,209,81,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["90+"],"y":[529],"type":"bar","name":"90+","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["Other, non-hispanic"],"y":[187],"type":"bar","name":"Other, non-hispanic","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x3","yaxis":"y3","frame":null},{"x":["Hispanic"],"y":[382],"type":"bar","name":"Hispanic","marker":{"color":"rgba(49,104,142,1)","line":{"color":"rgba(49,104,142,1)"}},"textfont":{"color":"rgba(49,104,142,1)"},"error_y":{"color":"rgba(49,104,142,1)"},"error_x":{"color":"rgba(49,104,142,1)"},"xaxis":"x3","yaxis":"y3","frame":null},{"x":["Black, non-hispanic"],"y":[1412],"type":"bar","name":"Black, non-hispanic","marker":{"color":"rgba(53,183,121,1)","line":{"color":"rgba(53,183,121,1)"}},"textfont":{"color":"rgba(53,183,121,1)"},"error_y":{"color":"rgba(53,183,121,1)"},"error_x":{"color":"rgba(53,183,121,1)"},"xaxis":"x3","yaxis":"y3","frame":null},{"x":["White, non-hispanic"],"y":[4812],"type":"bar","name":"White, non-hispanic","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x3","yaxis":"y3","frame":null}],"layout":{"xaxis":{"domain":[0,1],"automargin":true,"type":"category","categoryorder":"array","categoryarray":["Male","Female"],"anchor":"y"},"xaxis2":{"domain":[0,1],"automargin":true,"type":"category","categoryorder":"array","categoryarray":["65 to 69","70 to 74","75 to 79","80 to 84","85 to 89","90+"],"anchor":"y2"},"xaxis3":{"domain":[0,1],"automargin":true,"tickfont":{"size":11},"type":"category","categoryorder":"array","categoryarray":["Other, non-hispanic","Hispanic","Black, non-hispanic","White, non-hispanic"],"anchor":"y3","title":"Categories"},"yaxis3":{"domain":[0,0.313333333333333],"automargin":true,"anchor":"x3"},"yaxis2":{"domain":[0.353333333333333,0.646666666666667],"automargin":true,"anchor":"x2","title":"Frequency"},"yaxis":{"domain":[0.686666666666667,1],"automargin":true,"anchor":"x"},"annotations":[],"shapes":[],"images":[],"margin":{"b":40,"l":60,"t":25,"r":10},"hovermode":"closest","showlegend":false,"plot_bgcolor":"f8f8f8","titlefont":{"size":14},"title":{"text":"Demographic frequencies"},"legend":{"font":{"size":10}}},"attrs":{"4a9d4cc345ef":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"4a9d28247548":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"4a9d718fde8e":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"subplot":true,"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+=======
+<div id="htmlwidget-ab1ff56c7bb5345fd17d" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ab1ff56c7bb5345fd17d">{"x":{"data":[{"x":["Male"],"y":[2869],"type":"bar","name":"Male","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Female"],"y":[3924],"type":"bar","name":"Female","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["65 to 69"],"y":[981],"type":"bar","name":"65 to 69","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["70 to 74"],"y":[1651],"type":"bar","name":"70 to 74","marker":{"color":"rgba(65,68,135,1)","line":{"color":"rgba(65,68,135,1)"}},"textfont":{"color":"rgba(65,68,135,1)"},"error_y":{"color":"rgba(65,68,135,1)"},"error_x":{"color":"rgba(65,68,135,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["75 to 79"],"y":[1478],"type":"bar","name":"75 to 79","marker":{"color":"rgba(42,120,142,1)","line":{"color":"rgba(42,120,142,1)"}},"textfont":{"color":"rgba(42,120,142,1)"},"error_y":{"color":"rgba(42,120,142,1)"},"error_x":{"color":"rgba(42,120,142,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["80 to 84"],"y":[1269],"type":"bar","name":"80 to 84","marker":{"color":"rgba(34,168,132,1)","line":{"color":"rgba(34,168,132,1)"}},"textfont":{"color":"rgba(34,168,132,1)"},"error_y":{"color":"rgba(34,168,132,1)"},"error_x":{"color":"rgba(34,168,132,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["85 to 89"],"y":[885],"type":"bar","name":"85 to 89","marker":{"color":"rgba(122,209,81,1)","line":{"color":"rgba(122,209,81,1)"}},"textfont":{"color":"rgba(122,209,81,1)"},"error_y":{"color":"rgba(122,209,81,1)"},"error_x":{"color":"rgba(122,209,81,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["90+"],"y":[529],"type":"bar","name":"90+","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x2","yaxis":"y2","frame":null},{"x":["Other, non-hispanic"],"y":[187],"type":"bar","name":"Other, non-hispanic","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x3","yaxis":"y3","frame":null},{"x":["Hispanic"],"y":[382],"type":"bar","name":"Hispanic","marker":{"color":"rgba(49,104,142,1)","line":{"color":"rgba(49,104,142,1)"}},"textfont":{"color":"rgba(49,104,142,1)"},"error_y":{"color":"rgba(49,104,142,1)"},"error_x":{"color":"rgba(49,104,142,1)"},"xaxis":"x3","yaxis":"y3","frame":null},{"x":["Black, non-hispanic"],"y":[1412],"type":"bar","name":"Black, non-hispanic","marker":{"color":"rgba(53,183,121,1)","line":{"color":"rgba(53,183,121,1)"}},"textfont":{"color":"rgba(53,183,121,1)"},"error_y":{"color":"rgba(53,183,121,1)"},"error_x":{"color":"rgba(53,183,121,1)"},"xaxis":"x3","yaxis":"y3","frame":null},{"x":["White, non-hispanic"],"y":[4812],"type":"bar","name":"White, non-hispanic","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x3","yaxis":"y3","frame":null}],"layout":{"xaxis":{"domain":[0,1],"automargin":true,"type":"category","categoryorder":"array","categoryarray":["Male","Female"],"anchor":"y"},"xaxis2":{"domain":[0,1],"automargin":true,"type":"category","categoryorder":"array","categoryarray":["65 to 69","70 to 74","75 to 79","80 to 84","85 to 89","90+"],"anchor":"y2"},"xaxis3":{"domain":[0,1],"automargin":true,"tickfont":{"size":11},"type":"category","categoryorder":"array","categoryarray":["Other, non-hispanic","Hispanic","Black, non-hispanic","White, non-hispanic"],"anchor":"y3","title":"Categories"},"yaxis3":{"domain":[0,0.313333333333333],"automargin":true,"anchor":"x3"},"yaxis2":{"domain":[0.353333333333333,0.646666666666667],"automargin":true,"anchor":"x2","title":"Frequency"},"yaxis":{"domain":[0.686666666666667,1],"automargin":true,"anchor":"x"},"annotations":[],"shapes":[],"images":[],"margin":{"b":40,"l":60,"t":25,"r":10},"hovermode":"closest","showlegend":false,"plot_bgcolor":"f8f8f8","titlefont":{"size":14},"title":{"text":"Demographic frequencies"},"legend":{"font":{"size":10}}},"attrs":{"d53d6effb971":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"d53d56e7e2a5":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"d53d11d0eb36":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"subplot":true,"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+>>>>>>> 5f402c7bca41e68677b56fc7db192ae17888edc1
 </div>
 
 

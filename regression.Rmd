@@ -1,0 +1,74 @@
+---
+title: "Regression Analysis"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r include=FALSE}
+library(flexdashboard)
+library(knitr)
+library(rmarkdown)
+library(tidyverse)
+library(plotly)
+library(haven)
+```
+
+
+```{r nhats, echo=FALSE}
+nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
+  select(spid, hc5depresan1, hc5depresan2, r5dgender, r5d2intvrage, rl5dracehisp, md5canewlker, 
+         sn5dnumsn, cg5ratememry, hc5health, wb5truestme4) %>%
+  janitor::clean_names() %>%   
+  filter(hc5depresan1 > 0, hc5depresan2 > 0, sn5dnumsn >= 0, r5d2intvrage > 0, md5canewlker > 0, 
+         cg5ratememry > 0, hc5health > 0, wb5truestme4 > 0, rl5dracehisp < 5)
+
+nhats %>% 
+  select(hc5depresan1, hc5depresan2)  %>% 
+  rowSums(na.rm = TRUE) -> nhats$phq.total
+
+nhats = nhats %>%
+  mutate(phq.total = phq.total - 2) %>% 
+  mutate(phq_cat = if_else(phq.total < 3, "Mild/No Depression", "Moderate/Severe Depression")) %>% 
+  mutate(
+    gender = recode(r5dgender, `1` = "Male", `2` = "Female"),
+    gender = factor(gender),
+    age_cat = recode(r5d2intvrage, `1` = "65 to 69", `2` = "70 to 74", `3` = "75 to 79", 
+                 `4` = "80 to 84", `5` = "85 to 89", `6` = "90+"),
+    age_cat = factor(age_cat, levels = c("65 to 69", "70 to 74", "75 to 79", "80 to 84", 
+                  "85 to 89", "90+")),
+    race_ethnicity = recode(rl5dracehisp, `1` = "White, non-hispanic", `2` = "Black, non-hispanic", 
+                  `3` = "Other, non-hispanic", `4` = "Hispanic"),
+    race_ethnicity = factor(race_ethnicity),
+    cane_walker_wheelchair = recode(md5canewlker, `1` = "Yes", `2` = "No"),
+    cane_walker_wheelchair = factor(cane_walker_wheelchair),
+    memory = recode(cg5ratememry, `1` = "Excellent", `2` = "Very Good", `3` = "Good", 
+                    `4` = "Fair", `5` = "Poor"),
+    memory = factor(memory, c("Excellent", "Very Good", "Good", "Fair", "Poor")),
+    overall_health = recode(hc5health, `1` = "Excellent", `2` = "Very Good", `3` = "Good", 
+                    `4` = "Fair", `5` = "Poor"),
+    overall_health = factor(overall_health, levels = c("Excellent", "Very Good", "Good", "Fair", 
+                    "Poor")),
+    likes_living_situation = recode(wb5truestme4, `1` = "Agree a lot", `2` = "Agree a little", 
+                    `3` = "Agree not at all"),
+    likes_living_situation = factor(likes_living_situation, c("Agree a lot", "Agree a little", 
+                    "Agree not at all")),
+    ) %>% 
+  rename(social_network_size = sn5dnumsn)
+```
+
+### Multivariable Logistic Regression Model
+
+```{r,message=FALSE, warning=FALSE}
+logit_model = nhats %>%
+  mutate(phq_cat = if_else(phq_cat == "Mild/No Depression", 0, 1)) %>%
+  glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
+
+logit_model %>%
+  broom::tidy() %>%
+  mutate(OR = exp(estimate)) %>%
+  select(term, betas = estimate, OR, p.value) %>%
+  knitr::kable(digits = 3)
+
+```

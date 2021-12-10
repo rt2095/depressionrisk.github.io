@@ -14,11 +14,9 @@ library(plotly)
 
 ### Round 5 NHATS Dataset and relevant variables
 
-The National Health and Aging Trends Study (NHATS) is a country-wide survey program that collects information on a nationally representative sample of Medicare beneficiaries aged 65 years and older.Data is collected through annual, in-person interviews to collect information on disablement and its consequences. Detailed information is collected on participants’ physical and cognitive capacity, how activities
-of daily life are carried out, the social, physical, and technological environment, and participation
-in valued activities. The NHATS data was first collected in 2011 and the Round 5 data collected in 2015 was the replenishment of the sample set to correctly represent the older Medicare population (NHATS User guide).
+The National Health and Aging Trends Study (NHATS) is a country-wide survey program that collects information on a nationally representative sample of Medicare beneficiaries aged 65 years and older. Data is collected through annual, in-person interviews to collect information on disablement and its consequences. Detailed information is collected on participants’ physical and cognitive capacity, how activities of daily life are carried out, the social, physical, and technological environment, and participation in valued activities. The NHATS data was first collected in 2011 and the Round 5 data collected in 2015 was the replenishment of the sample set to correctly represent the older Medicare population (NHATS User guide).
 
-For the purposes of this study we used data from Round 5 and included the variables ID, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4). Variables were renamed during data cleaning. Furthermore, categorical variables were recoded to include descriptions of values and converted into factors. In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
+For the purposes of this study we used data from Round 5 and included the ID variable, the two variables needed for the depression risk scale (PHQ-2) (hcdepresan1 and hcdepresan2), gender (r5dgender), age (r5d2intvrage), race (rl5dracehisp), whether participant uses mobility devices (md5canewlker), size of social network (sn5dnumsn), self rated memory (cg5ratememry), self-rated health (hc5health), and whether they are happy with their living situation (wb5truestme4). Variables were renamed during data cleaning. Furthermore, categorical variables were recoded to include descriptions of values and converted into factors. In creating dichotomous variable phq_cat regarding depression status, phq.total was subtracted by 2 to account for the fact that total scores on the PHQ-2 should range from 0-6 (sum of two items ranging from 0-3, while scores for the two items provided in our data ranged from 1-4). Once 2 was subtracted from the total score, phq_cat was dichotomized based on a cutoff point of 3 or higher.
 
 The following variables were included in analyses:
 
@@ -49,7 +47,7 @@ nhats %>%
 
 nhats = nhats %>%
   mutate(phq.total = phq.total - 2) %>% 
-  mutate(phq_cat = if_else(phq.total < 3, "Mild/No Depression", "Moderate/Severe Depression")) %>% 
+  mutate(phq_cat = if_else(phq.total < 3, "Low Depression Risk", "Elevated Depression Risk")) %>% 
   mutate(
     gender = recode(r5dgender, `1` = "Male", `2` = "Female"),
     gender = factor(gender),
@@ -92,18 +90,24 @@ nhats  %>%
           "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
 ```
 
+### High Depression risk
+
 **Frequency of high depression risk within this data set:**
 
-```{r, echo=FALSE, message=FALSE}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 nhats  %>% group_by(phq_cat) %>% 
  summarise(
          frequency = n()
          ) %>%  knitr::kable()
 ```
 
+### Demographic Frequencies
+
 **Race/ ethnicity frequency table**
 
-```{r, echo=FALSE, message=FALSE}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
  summarise(
          frequency = n()) %>%  
@@ -113,7 +117,8 @@ nhats  %>% group_by(phq_cat, race_ethnicity) %>%
 
 **Gender frequency table**
 
-```{r, echo=FALSE, message=FALSE}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 nhats  %>% group_by(phq_cat, gender) %>% 
  summarise(
          frequency = n()) %>%  
@@ -122,7 +127,7 @@ nhats  %>% group_by(phq_cat, gender) %>%
 ```
 
 
-```{r nhats_demo, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 gender_bar = 
   nhats  %>%   
   count(gender) %>% 
@@ -150,9 +155,10 @@ demo_bar = subplot(gender_bar, age_bar, race_bar, nrows = 3) %>%
          title = list(text = "Demographic frequencies"), 
          titlefont = list(size = 14),
         legend = list(font = list(size = 10)))
+
 ```
 
-```{r, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 demo_bar 
 ```
 

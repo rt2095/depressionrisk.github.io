@@ -69,20 +69,20 @@ nhats = nhats %>%
 
 ### Assessing predictors of depression risk in older adults
 
-##### Group Members:
+#### Group Members
 Ifrah Fayyaz (if2282), Lydia Parr (lcp2148), Lauren Cohen (lcc2181), Onyeka Isamah (oi2142), Riddhi Thakkar (rt2640) 
 
 
-#### Introduction:
+### Introduction
 Previous literature has examined a wide range of risk factors for depression in older adults. Older age, female gender, isolation, and physical health have all be found to be risk factors for depression in older adults (Sözeri-Varma). Memory issues and disorders affecting cognition are also associated with depression risk (Köhler et al, 2010). Depression risk in older adults is also associated with race and ethnicity, with evidence certain groups have a higher risk of depression (Hooker et al, 2019). The outcome will be the PHQ-2, which sums two variables rating mood and well-being on a Likert scale (validated by Kroenke et al, 2003).
 
-#### Study motivation and goals
+### Study motivation and goals
 The motivation for this project is to identify predictors of depression outcomes among older adults. In this project, predictors of interest are gender, age, race/ethnic group, whether respondent uses an assistive device (cane, a walker, or a wheelchair), self-rated memory, overall health condition, whether the respondent likes their living situation, and the respondents social network size. Older adults were chosen as the target population since we know that they are a population that is known to have higher risk of depression compared to the general population. Publications that have studied the associations of these specific predictor variables and depression outcomes were also the inspiration of this project. 
 
-#### Initial questions
+### Initial questions
 Most of our questions were related to defining our research question and transslating our research question into methods. Initially, we wanted to see what variables had an effect on quality of life within our population in the dataset. We needed to get more specific about our analyses plan, so we had to ask questions as to the best variables to include and the best methods to manipulate and define them. For example, we asked ourselves how we would measure the depression outcome. Considering this question led to creating a new variable that would serve has the PHQ-2 measure. Since there were a number of possible predictors available in the data set, we had to evolve our initial question by specifying which predictors we wanted to explore in the analyses. We also spent time considering which levels should be excluded and how to correctly order factor variables. 
 
-#### Data 
+### Data 
 **Source**: National Health and Aging Trends Study from Johns Hopkins and Westat.
 
 **Methods and data cleaning**: 
@@ -105,7 +105,10 @@ Outcome variable:
 
 * `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
-#### Exploratory analysis:   
+#### Exploratory analysis: add link to dashboard and exploratory stats page.  
+
+### Exploratory analysis:  
+
 Summary:
 
 
@@ -115,7 +118,7 @@ Summary:
 **Click [here](exploratory_analysis.html) to see the our full exploratory analyses**
 
 
-####  Additional analyses: Multivariable logistic regression
+###  Additional analyses: Multivariable logistic regression
 
 
 <center> 
@@ -127,21 +130,21 @@ Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity 
 
 **OR Interpretations** </center>
 
-##### Risks factors:
- *Overall health condition*: Those who responded as "Poor" when asked about their overall health condition had **11 times** the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
+#### Risks factors:
+ *Overall health condition*: Those who responded as "Poor" when asked about their overall health condition had **11 times** the increased odds of elevated depression risk compared to those who responded as "Excellent", adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, social network size, and living situation. 
 
- *Self-rate memory*: Those who responded as "Poor" when asked to rate their memory had 1.8 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Excellent". 
+ *Self-rated memory*: Those who responded as "Poor" when asked to rate their memory had 1.8 times the increased odds of elevated depression risk compared to those who responded as "Excellent", adjusting for gender, age category, race/ethnicity, assistive device use, overall health condition, social network size, and living situation. 
  
- *Assistive device*: Those who responded "yes" to using a cane, walker, or wheelchair had 1.5 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "No". 
+ *Assistive device*: Those who responded "yes" to using a cane, walker, or wheelchair had 1.5 times the increased odds of elevated depression risk compared to those who responded as "No", adjusting for gender, age category, race/ethnicity, self-rated memory, overall health condition, social network size, and living situation. 
  
- *Living situation*: Those who responded with "Agree NOT at all" when asked if they liked their currenty living situation had approximatley 3.1 times the increased odds of scoring a 3 or more on the PHQ-2 compared to those who responded as "Agree a lot". 
- 
-#####  Protective factors:
+ *Living situation*: Those who responded with "Agree NOT at all" when asked if they liked their current living situation had approximately 3.1 times the increased odds of elevated depression risk compared to those who responded as "Agree a lot", adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, overall health condition, and social network size. 
 
- *Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to respondents who were age categories 65 to 69. 
  
- *Race*: Non Hispanic White respondents had 24.7% decreased odds of scoring a 3 or more on the PHQ-2 compared to Black respondents.
+####  Protective factors:
+
+ *Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of elevated depression risk compared to respondents who were age categories 65 to 69, adjusting for gender, race/ethnicity, assistive device use, self-rated memory, overall health condition, social network size, and living situation. 
  
+ *Race*: Non Hispanic White respondents had 24.7% decreased odds of elevated depression risk compared to Black respondents, adjusting for gender, age category, assistive device use, self-rated memory, overall health condition, social network size, and living situation.
 
  
 ```{r, echo=FALSE}
@@ -156,7 +159,7 @@ logit_model %>%
   knitr::kable(digits = 3)
 ```
 
-##### Discussion:
+### Discussion
 The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network sizes. 
 
 The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factots for depression among this population.
