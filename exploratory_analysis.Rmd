@@ -108,7 +108,7 @@ ggplotly(health_phq)
 
 ####  Visualizing any differences in depression outcome by predictor, self-rated memory. 
 
-- Survey respondents were asked to rate their memory on a scale of 1-5, 1 being Excellent and 5 being Poor. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by how participants rated their memory (x-axis). 
+- Survey respondents were asked to rate their memory on a scale of 1-5, 1 being Excellent and 5 being Poor. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Low Depression Risk or Elevated Depression Risk. The figure is broken down by how participants rated their memory (x-axis). 
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE}
 mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
