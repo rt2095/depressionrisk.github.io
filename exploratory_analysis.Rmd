@@ -4,6 +4,7 @@ output:
   html_document:
     toc: true
     toc_float: true
+    theme: sandstone
 ---
 ```{r include=FALSE}
 library(flexdashboard)
@@ -61,7 +62,7 @@ nhats = nhats %>%
 
 Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. Proportion of higher PHQ-2 score were greater among lower satisfaction with living situations. 
 
-```{r nhats_living_situation, echo=FALSE, warning=FALSE,message=FALSE}
+```{r nhats_living_situation, echo=FALSE, warning=FALSE, message=FALSE, dpi=135}
 living_plot = nhats %>% 
   ggplot(aes(x = likes_living_situation, y = phq.total, color = race_ethnicity)) + 
   geom_point(position = "jitter", size = 0.5) + 
@@ -80,7 +81,7 @@ ggplotly(living_plot)
 
 - The respondents were asked to rate their overall health on a scale from 1-5 with 1 being Excellent health and 5 being poor health. The graph below illustrates the proportion of respondents rating their overall health stratified by their depression outcome (PHQ-2) status. We can observe that respondents who scored as Low depression risk recorded their perceived overall health within the Excellent to Good range while respondents with Elevated depression risk were more likely to report their overall health within the Good to Poor range. 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, dpi=135}
 nhats %>% 
   filter(hc5health > 0) %>%
   ggplot(aes(x = overall_health, group = phq_cat)) + 
@@ -101,7 +102,7 @@ nhats %>%
 
 - The graph below shows the mean social network size for different age groups stratified by gender and depression risk. From the graphs we can observe that female respondents at a low risk of depression are much likely to have a greater social network size on average as compared to females with a higher risk for depression. We also observe that females, in general, have a greater social network group as compared to males, controlling for depression risk.
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, dpi=135}
 sn_plot = nhats %>% group_by(phq_cat, age_cat, gender) %>% 
   summarise(
     mean = mean(social_network_size)
@@ -128,6 +129,7 @@ Initial observations:
 - A slightly lower proportion of respondents whi rated their memory as "Excellent" who had high risk of depression symptoms compared to those who had low risk of depression symptomns and scored "Excellent".
 - Higher proportion of high-risk depression respondents who rated their memory as "Poor" compared to low risk depression patients who also rated their memory as "Poor". 
 
+<<<<<<< HEAD
 ```{r, echo=FALSE,warning=FALSE,message=FALSE}
 mem_plot = nhats %>%  
   group_by(phq_cat, memory) %>% 
@@ -138,6 +140,17 @@ mem_plot = nhats %>%
 mem_plot %>%        
     ggplot(aes(x = memory, y = proportion, group = phq_cat)) + geom_line(alpha = 0.7, color = "#440154FF") +
     geom_point(alpha = 1.2, color = "#FDE725FF") + 
+=======
+```{r, echo=FALSE,warning=FALSE,message=FALSE, dpi=135}
+mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
+  summarise(n = n()) %>% mutate(
+  proportion = (n / sum(n)))
+
+  memory_plot = mem_plot %>% mutate(memory = factor(memory)) %>% drop_na() %>%   
+    ggplot(aes(x = memory, y = proportion, group = phq_cat)) + geom_line(alpha = 0.4) +
+  
+    geom_point(alpha = 0.7, color = "light blue") + 
+>>>>>>> b717697b5d4b586bdb86ec7d0c97de721a68a9fa
     facet_grid(~phq_cat) + 
     labs( title = "Self rated memory and level of depression risk",
     x = "Self rated memory", y = " Proportion of respondents") +  
@@ -157,6 +170,7 @@ Initial observations:
 -  A higher proportion of those who responded to using an assistive device having elevated risk for depression symptoms compared to those who responded "no" using an assistive device and have low risk of depression symptoms.
 - There doesn't appear to be any differences in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
 
+<<<<<<< HEAD
 ```{r, echo=FALSE,warning=FALSE,message=FALSE, fig.align='center'}
 nhats %>% 
   ggplot(aes(x = cane_walker_wheelchair, group = phq_cat)) + 
@@ -170,6 +184,24 @@ nhats %>%
     scale_fill_viridis_d()
 
 
+=======
+```{r, echo=FALSE,warning=FALSE,message=FALSE, fig.align='center', dpi=135}
+cane_walker_wc_plot = nhats %>%  
+    group_by(phq_cat, cane_walker_wheelchair) %>% 
+    summarise(n = n()) %>%  
+    mutate(proportion = (n / sum(n)))
+
+cane_walker_wc_plot = 
+  cane_walker_wc_plot %>%  
+  ggplot(aes(x = cane_walker_wheelchair, y =proportion)) + 
+  geom_col(fill= "light blue") + facet_grid(~phq_cat)+
+  labs( title = "Use of cane, walker, wheelchair and level of depression risk",
+      x = "Asked if used a cane, walker/wheel chair", y = " Proportion of respondents")+  
+    scale_x_discrete(
+      labels = c("Yes","No")) + 
+    scale_y_continuous(labels = scales::percent) + 
+  theme(panel.background = element_rect(fill = "white", colour = "grey50"))
+>>>>>>> b717697b5d4b586bdb86ec7d0c97de721a68a9fa
 
 cane_walker_wc_plot
 ```
