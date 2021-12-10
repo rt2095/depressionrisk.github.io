@@ -13,8 +13,8 @@
 
 <title>Regression Analysis</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -365,13 +365,22 @@ div.tocify {
 <div id="multivariable-logistic-regression-model" class="section level3">
 <h3>Multivariable Logistic Regression Model</h3>
 <pre class="r"><code>logit_model = nhats %&gt;%
-  mutate(phq_cat = if_else(phq_cat == &quot;Mild/No Depression&quot;, 0, 1)) %&gt;%
+  mutate(phq_cat = if_else(phq_cat == &quot;Low Depression Risk&quot;, 0, 1)) %&gt;%
   glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = &quot;binomial&quot;, data = .) 
+
 
 logit_model %&gt;%
   broom::tidy() %&gt;%
   mutate(OR = exp(estimate)) %&gt;%
   select(term, betas = estimate, OR, p.value) %&gt;%
+  mutate(term = str_replace(term, &quot;age_cat&quot;, &quot;Age Group: &quot;)) %&gt;%
+  mutate(term = str_replace(term, &quot;gender&quot;, &quot;Gender: &quot;)) %&gt;%
+  mutate(term = str_replace(term, &quot;race_ethnicity&quot;, &quot;Race: &quot;)) %&gt;%
+  mutate(term = str_replace(term, &quot;cane_walker_wheelchair&quot;, &quot;Cane Walking/Wheelchair: &quot;)) %&gt;%
+  mutate(term = str_replace(term, &quot;memory&quot;, &quot;Memory: &quot;)) %&gt;%
+  mutate(term = str_replace(term, &quot;overall_health&quot;, &quot;Overall Health: &quot;)) %&gt;%
+  mutate(term = str_replace(term, &quot;likes_living_situation&quot;, &quot;Likes Living Situation: &quot;)) %&gt;%
+  mutate(term = str_replace(term, &quot;social_network_size&quot;, &quot;Social Network Size&quot;)) %&gt;%
   knitr::kable(digits = 3)</code></pre>
 <table>
 <thead>
@@ -390,127 +399,127 @@ logit_model %&gt;%
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">genderMale</td>
+<td align="left">Gender: Male</td>
 <td align="right">-0.126</td>
 <td align="right">0.881</td>
 <td align="right">0.131</td>
 </tr>
 <tr class="odd">
-<td align="left">age_cat70 to 74</td>
+<td align="left">Age Group: 70 to 74</td>
 <td align="right">-0.279</td>
 <td align="right">0.756</td>
 <td align="right">0.039</td>
 </tr>
 <tr class="even">
-<td align="left">age_cat75 to 79</td>
+<td align="left">Age Group: 75 to 79</td>
 <td align="right">-0.052</td>
 <td align="right">0.949</td>
 <td align="right">0.693</td>
 </tr>
 <tr class="odd">
-<td align="left">age_cat80 to 84</td>
+<td align="left">Age Group: 80 to 84</td>
 <td align="right">-0.261</td>
 <td align="right">0.770</td>
 <td align="right">0.064</td>
 </tr>
 <tr class="even">
-<td align="left">age_cat85 to 89</td>
+<td align="left">Age Group: 85 to 89</td>
 <td align="right">-0.311</td>
 <td align="right">0.733</td>
 <td align="right">0.043</td>
 </tr>
 <tr class="odd">
-<td align="left">age_cat90+</td>
+<td align="left">Age Group: 90+</td>
 <td align="right">-0.410</td>
 <td align="right">0.664</td>
 <td align="right">0.024</td>
 </tr>
 <tr class="even">
-<td align="left">race_ethnicityHispanic</td>
+<td align="left">Race: Hispanic</td>
 <td align="right">0.172</td>
 <td align="right">1.187</td>
 <td align="right">0.270</td>
 </tr>
 <tr class="odd">
-<td align="left">race_ethnicityOther, non-hispanic</td>
+<td align="left">Race: Other, non-hispanic</td>
 <td align="right">0.250</td>
 <td align="right">1.284</td>
 <td align="right">0.248</td>
 </tr>
 <tr class="even">
-<td align="left">race_ethnicityWhite, non-hispanic</td>
+<td align="left">Race: White, non-hispanic</td>
 <td align="right">-0.284</td>
 <td align="right">0.753</td>
 <td align="right">0.002</td>
 </tr>
 <tr class="odd">
-<td align="left">cane_walker_wheelchairYes</td>
+<td align="left">Cane Walking/Wheelchair: Yes</td>
 <td align="right">0.407</td>
 <td align="right">1.503</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">memoryVery Good</td>
+<td align="left">Memory: Very Good</td>
 <td align="right">0.047</td>
 <td align="right">1.048</td>
 <td align="right">0.790</td>
 </tr>
 <tr class="odd">
-<td align="left">memoryGood</td>
+<td align="left">Memory: Good</td>
 <td align="right">0.065</td>
 <td align="right">1.067</td>
 <td align="right">0.701</td>
 </tr>
 <tr class="even">
-<td align="left">memoryFair</td>
+<td align="left">Memory: Fair</td>
 <td align="right">0.437</td>
 <td align="right">1.549</td>
 <td align="right">0.013</td>
 </tr>
 <tr class="odd">
-<td align="left">memoryPoor</td>
+<td align="left">Memory: Poor</td>
 <td align="right">0.611</td>
 <td align="right">1.842</td>
 <td align="right">0.006</td>
 </tr>
 <tr class="even">
-<td align="left">overall_healthVery Good</td>
+<td align="left">Overall Health: Very Good</td>
 <td align="right">0.392</td>
 <td align="right">1.480</td>
 <td align="right">0.074</td>
 </tr>
 <tr class="odd">
-<td align="left">overall_healthGood</td>
+<td align="left">Overall Health: Good</td>
 <td align="right">0.897</td>
 <td align="right">2.453</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">overall_healthFair</td>
+<td align="left">Overall Health: Fair</td>
 <td align="right">1.444</td>
 <td align="right">4.236</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="odd">
-<td align="left">overall_healthPoor</td>
+<td align="left">Overall Health: Poor</td>
 <td align="right">2.400</td>
 <td align="right">11.019</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">likes_living_situationAgree a little</td>
+<td align="left">Likes Living Situation: Agree a little</td>
 <td align="right">0.724</td>
 <td align="right">2.064</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="odd">
-<td align="left">likes_living_situationAgree not at all</td>
+<td align="left">Likes Living Situation: Agree not at all</td>
 <td align="right">1.134</td>
 <td align="right">3.108</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">social_network_size</td>
+<td align="left">Social Network Size</td>
 <td align="right">-0.028</td>
 <td align="right">0.973</td>
 <td align="right">0.379</td>

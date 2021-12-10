@@ -30,7 +30,7 @@ nhats %>%
 
 nhats = nhats %>%
   mutate(phq.total = phq.total - 2) %>% 
-  mutate(phq_cat = if_else(phq.total < 3, "Mild/No Depression", "Moderate/Severe Depression")) %>% 
+  mutate(phq_cat = if_else(phq.total < 3, "Low Depression Risk", "Elevated Depression Risk")) %>% 
   mutate(
     gender = recode(r5dgender, `1` = "Male", `2` = "Female"),
     gender = factor(gender),
@@ -62,7 +62,7 @@ nhats = nhats %>%
 
 ```{r,message=FALSE, warning=FALSE}
 logit_model = nhats %>%
-  mutate(phq_cat = if_else(phq_cat == "Mild/No Depression", 0, 1)) %>%
+  mutate(phq_cat = if_else(phq_cat == "Low Depression Risk", 0, 1)) %>%
   glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
 
 
