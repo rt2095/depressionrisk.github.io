@@ -105,12 +105,11 @@ Outcome variable:
 
 * `phq_cat`: Elevated risk of depression (dichotomized based on total PHQ-2 score)
 
-<<<<<<< HEAD
-### Exploratory analysis: add link to dashboard and exploratory stats page.  
-=======
-#### Exploratory analysis:   
+#### Exploratory analysis: add link to dashboard and exploratory stats page.  
+
+### Exploratory analysis:  
+
 Summary:
->>>>>>> ead2bcfab08b897e694c1623c5883a78ceedaf9c
 
 
 **Click [here](dashboard.html) to see the full dashboard**

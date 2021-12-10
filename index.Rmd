@@ -12,7 +12,9 @@ output:
 
 <br>
 <center>
+
 ### Introduction
+
 </center>
 Previous literature has examined a **wide range of risk factors for depression** in
 older adults. Older age, female gender, isolation, and physical health
