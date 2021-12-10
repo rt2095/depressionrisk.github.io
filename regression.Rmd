@@ -65,10 +65,19 @@ logit_model = nhats %>%
   mutate(phq_cat = if_else(phq_cat == "Mild/No Depression", 0, 1)) %>%
   glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
 
+
 logit_model %>%
   broom::tidy() %>%
   mutate(OR = exp(estimate)) %>%
   select(term, betas = estimate, OR, p.value) %>%
+  mutate(term = str_replace(term, "age_cat", "Age Group: ")) %>%
+  mutate(term = str_replace(term, "gender", "Gender: ")) %>%
+  mutate(term = str_replace(term, "race_ethnicity", "Race: ")) %>%
+  mutate(term = str_replace(term, "cane_walker_wheelchair", "Cane Walking/Wheelchair: ")) %>%
+  mutate(term = str_replace(term, "memory", "Memory: ")) %>%
+  mutate(term = str_replace(term, "overall_health", "Overall Health: ")) %>%
+  mutate(term = str_replace(term, "likes_living_situation", "Likes Living Situation: ")) %>%
+  mutate(term = str_replace(term, "social_network_size", "Social Network Size")) %>%
   knitr::kable(digits = 3)
 
 ```
