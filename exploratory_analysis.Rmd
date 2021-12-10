@@ -60,8 +60,7 @@ nhats = nhats %>%
 ### Living situation
 
 Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
-
-```{r nhats_living_situation, echo=FALSE}
+```{r nhats_living_situation, echo=FALSE, warning=FALSE,message=FALSE}
 
 living_plot = nhats %>% 
   ggplot(aes(x = likes_living_situation, y = phq.total, color = race_ethnicity)) + 
@@ -79,7 +78,7 @@ ggplotly(living_plot)
 
 Plotting social network (by race/gender/age_cat) and health by phq_cat:
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
 sn_phq = nhats %>% 
   ggplot(aes(x = social_network_size, group = phq_cat)) + 
     geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat = "count") +
@@ -110,7 +109,7 @@ ggplotly(health_phq)
 
 - Survey respondents were asked to rate their memory on a scale of 1-5, 1 being Excellent and 5 being Poor. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by how participants rated their memory (x-axis). 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
 mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
   summarise(n = n()) %>% mutate(
   proportion = (n / sum(n)))
@@ -134,7 +133,7 @@ ggplotly(memory_plot)
 - Survey respondents were asked if they used a cane walker wheelchair. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by if participants responded Yes, or No (x-axis). 
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
 cane_walker_wc_plot = nhats %>%  
     group_by(phq_cat, cane_walker_wheelchair) %>% 
     summarise(n = n()) %>%  
@@ -153,21 +152,6 @@ cane_walker_wc_plot =
   ggplotly(cane_walker_wc_plot)
 ```
 
-
-### Multivariable Logistic Regression Model:
-
-```{r}
-logit_model = nhats %>%
-  mutate(phq_cat = if_else(phq_cat == "Low Depression Risk", 0, 1)) %>%
-  glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
-
-logit_model %>%
-  broom::tidy() %>%
-  mutate(OR = exp(estimate)) %>%
-  select(term, betas = estimate, OR, p.value) %>%
-  knitr::kable(digits = 3)
-
-```
 
 
 
