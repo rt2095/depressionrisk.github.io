@@ -49,4 +49,4 @@ Additional interactivity added using <a href="https://plot.ly/">plotly</a> (v4.1
 <a href="https://www.nhats.org/researcher/nhats">Click here</a> to see publicly available dataset for National Health and Aging Trends Study.
 
 <p style="text-align: center;">
-<a href="https://github.com/rt2095/depressionrisk.github.io">Click here</a> to view our github repository for this project.
+<a href="https://github.com/rt2095/depressionrisk.github.io">Click here</a> to view our github repository for the project website. The project proposal as well as initial data cleaning and exploratory analysis were done in a separate repo which can be viewed <a href="https://github.com/2148parr/p8105_final_new"> here</a>.
