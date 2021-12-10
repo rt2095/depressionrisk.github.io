@@ -76,7 +76,7 @@ ggplotly(living_plot)
 
 ### Perceived Overall Health
 
-#### Plotting perceived overall health by depression risk:
+#### Visualizing any differences in depression outcome by predictor, perceived overall health.
 
 - The respondents were asked to rate their overall health on a scale from 1-5 with 1 being Excellent health and 5 being poor health. The graph below illustrates the proportion of respondents rating their overall health stratified by their depression outcome (PHQ-2) status. We can observe that respondents who scored as Mild/No depression recorded their perceived overall health within the Excellent to Good range while respondents with Moderate/Severe depression were more likely to report their overall health within the Good to Poor range. 
 
@@ -97,7 +97,7 @@ nhats %>%
 
 ### Social Network Size
 
-#### Plotting social network by age_cat - stratified by gender and depression risk 
+#### Visualizing any differences in depression outcome by predictor, social network size - stratified by gender.
 
 - The graph below shows the mean social network size for different age groups stratified by gender and depression risk. From the graphs we can observe that female respondents at a low risk of depression are much likely to have a greater social network size on average as compared to females with a higher risk for depression. We also observe that females, in general, have a greater social network group as compared to males, controlling for depression risk.
 
