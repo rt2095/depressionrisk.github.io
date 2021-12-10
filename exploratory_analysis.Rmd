@@ -12,11 +12,6 @@ library(haven)
 ```
 
 
-
-
-
-
-
 ```{r nhats, echo=FALSE}
 nhats = read_sas("./final_data/nhats_r5.sas7bdat")  %>%
   select(spid, hc5depresan1, hc5depresan2, r5dgender, r5d2intvrage, rl5dracehisp, md5canewlker, 
@@ -31,7 +26,7 @@ nhats %>%
 
 nhats = nhats %>%
   mutate(phq.total = phq.total - 2) %>% 
-  mutate(phq_cat = if_else(phq.total < 3, "Mild/No Depression", "Moderate/Severe Depression")) %>% 
+  mutate(phq_cat = if_else(phq.total < 3, "Low Depression Risk", "Elevated Depression Risk")) %>% 
   mutate(
     gender = recode(r5dgender, `1` = "Male", `2` = "Female"),
     gender = factor(gender),
@@ -57,89 +52,6 @@ nhats = nhats %>%
                     "Agree not at all")),
     ) %>% 
   rename(social_network_size = sn5dnumsn)
-```
-
-
-<center>
-**Summary Statistics for PHQ-2 outcome:**</center>
-```{r ,echo=FALSE}
-
-nhats  %>% 
- summarise(
-          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
-          "min phq-2" = min(phq.total, na.rm = TRUE),
-          "med phq-2" = median(phq.total, na.rm = TRUE),
-          "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
-```
-
-**Frequency of high depression risk within this data set:**
-
-```{r, echo=FALSE, message=FALSE}
-nhats  %>% group_by(phq_cat) %>% 
- summarise(
-         frequency = n()
-         ) %>%  knitr::kable()
-```
-
-**Race/ ethnicity frequency table**
-
-```{r, echo=FALSE, message=FALSE}
-nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
- summarise(
-         frequency = n()) %>%  
-  pivot_wider( names_from =  race_ethnicity,
-              values_from = frequency) %>%  knitr::kable()
-```
-
-**Gender frequency table**
-
-```{r, echo=FALSE, message=FALSE}
-nhats  %>% group_by(phq_cat, gender) %>% 
- summarise(
-         frequency = n()) %>%  
-  pivot_wider( names_from =  gender,
-              values_from = frequency) %>%  knitr::kable()
-```
-
-
-
-
-
-
-Preliminary exploratory visualizations of the three demographic variables, gender, age, and race/ethnicity, to illustrate the frequencies per category. 
-
-```{r nhats_demo}
-
-gender_bar = 
-  nhats  %>%   
-  count(gender) %>% 
-  mutate(gender = fct_reorder(gender, n)) %>% 
-  plot_ly(x = ~gender, y = ~n, color = ~gender, type = "bar", colors = "viridis") 
-
-age_bar = 
-  nhats  %>%   
-  count(age_cat) %>% 
-  plot_ly(x = ~age_cat, y = ~n, color = ~age_cat, type = "bar", colors = "viridis") 
-
-race_bar = 
-  nhats  %>%   
-  count(race_ethnicity) %>% 
-  mutate(race_ethnicity = fct_reorder(race_ethnicity, n)) %>% 
-  plot_ly(x = ~race_ethnicity, y = ~n, color = ~race_ethnicity, type = "bar", colors = "viridis") %>% 
-  layout(plot_bgcolor = "f8f8f8",
-         xaxis = list(tickfont = list(size = 11)), 
-         titlefont = list(size = 16),
-         showlegend = FALSE)
-
-demo_bar = subplot(gender_bar, age_bar, race_bar, nrows = 3) %>%
-  layout(xaxis3 = list(title = "Categories"), 
-         yaxis2 = list(title = "Frequency"),
-         title = list(text = "Demographic frequencies"), 
-         titlefont = list(size = 14),
-         legend = list(font = list(size = 10)))
-
-demo_bar 
-
 ```
 
 Plotting of participant view of living situation predictor against PHQ-2, stratified by race (EM) to show the differences in PHQ-2 (depression risk scale) distribution across categories. 
@@ -188,7 +100,7 @@ ggplotly(health_phq)
 
 ####  Visualizing any differences in depression outcome by predictor, self-rated memory. 
 
-- Survey respondents were asked to rate their memory on a scale of 1-5, 1 being Excellent and 5 being Poor. This plot is a visualiztion of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by how participants rated their memory (x-axis). 
+- Survey respondents were asked to rate their memory on a scale of 1-5, 1 being Excellent and 5 being Poor. This plot is a visualization of the proportion of respondents in this dataset by their depression outcome status - Mild/No Depression or Moderate/Severe Depression. The figure is broken down by how participants rated their memory (x-axis). 
 
 ```{r}
 mem_plot = nhats %>%  group_by(phq_cat, memory) %>% 
@@ -235,7 +147,7 @@ cane_walker_wc_plot =
 
 ```{r}
 logit_model = nhats %>%
-  mutate(phq_cat = if_else(phq_cat == "Mild/No Depression", 0, 1)) %>%
+  mutate(phq_cat = if_else(phq_cat == "Low Depression Risk", 0, 1)) %>%
   glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
 
 logit_model %>%

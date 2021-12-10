@@ -161,6 +161,3 @@ The data supported some of our expectations that were based on findings from the
 
 The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factots for depression among this population.
 
-
-
-

@@ -10,9 +10,9 @@ output:
 <img src = "depression-1.jpg" style = "width: 75%"> </center> 
 
 
-
+<br>
 <center>
-#### Introduction:
+### Introduction:
 </center>
 Previous literature has examined a **wide range of risk factors for depression** in
 older adults. Older age, female gender, isolation, and physical health
@@ -22,7 +22,7 @@ associated with depression risk (Köhler et al, 2010). Depression risk in
 older adults is also associated with race and ethnicity, with evidence
 certain groups have a higher risk of depression (Hooker et al, 2019).
 The outcome will be the PHQ-2, which sums two variables rating mood and
-well-being on a Likert scale (validated by Kroenke et al, 2003).
+well-being on a Likert scale (Kroenke et al, 2003).
 
 <center>
 **Click [here](final_report.html) to see the full project report!**

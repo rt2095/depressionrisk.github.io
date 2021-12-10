@@ -80,6 +80,48 @@ nhats = nhats %>%
 Preliminary exploratory visualizations of the three demographic variables, gender, age, and race/ethnicity, to illustrate the frequencies per category. 
 
 
+<center>
+**Summary Statistics for PHQ-2 outcome:**</center>
+```{r ,echo=FALSE}
+
+nhats  %>% 
+ summarise(
+          "mean phq-2" = round(mean(phq.total, na.rm = TRUE),2),
+          "min phq-2" = min(phq.total, na.rm = TRUE),
+          "med phq-2" = median(phq.total, na.rm = TRUE),
+          "max phq-2" = max(phq.total, na.rm = TRUE),) %>%  knitr::kable()
+```
+
+**Frequency of high depression risk within this data set:**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat) %>% 
+ summarise(
+         frequency = n()
+         ) %>%  knitr::kable()
+```
+
+**Race/ ethnicity frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, race_ethnicity) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  race_ethnicity,
+              values_from = frequency) %>%  knitr::kable()
+```
+
+**Gender frequency table**
+
+```{r, echo=FALSE, message=FALSE}
+nhats  %>% group_by(phq_cat, gender) %>% 
+ summarise(
+         frequency = n()) %>%  
+  pivot_wider( names_from =  gender,
+              values_from = frequency) %>%  knitr::kable()
+```
+
+
 ```{r nhats_demo, include=FALSE}
 gender_bar = 
   nhats  %>%   
@@ -110,7 +152,7 @@ demo_bar = subplot(gender_bar, age_bar, race_bar, nrows = 3) %>%
         legend = list(font = list(size = 10)))
 ```
 
-```{r}
+```{r, warning=FALSE}
 demo_bar 
 ```
 
