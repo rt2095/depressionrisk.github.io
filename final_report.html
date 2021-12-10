@@ -410,31 +410,24 @@ div.tocify {
 <li><p>Figure 1. PHQ-2 score were greater among lower satisfaction with living situations.</p></li>
 <li><p>Figure 2. Respondents who scored as low depression risk recorded their perceived overall health within the Excellent to Good range while respondents with an elevated risk of depression were more likely to report their overall health within the good to poor range.</p></li>
 </ul>
-<center>
 <p><strong>Click <a href="exploratory_analysis.html">here</a> to see the the full exploratory analyses with brief comments.</strong></p>
 <p><strong>Click <a href="dashboard.html">here</a> to see the full dashboard of all visualizations created for this project.</strong></p>
 <p><strong>Click <a href="data.html">here</a> to see summary statistics, frequency tables, and demographic frequency visualizations.</strong></p>
-</center>
 <p><br></p>
 </div>
 <div id="additional-analyses-multivariable-logistic-regression" class="section level3">
 <h3>Additional analyses: Multivariable logistic regression</h3>
 <p>We conducted multivariable logistic regression to identify predictors of depression risk.</p>
-<p><strong>Results</strong>:</p>
-Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
-<center>
-<br> <strong>OR Interpretations</strong>
-</center>
-<p><br></p>
-<div id="risks-factors" class="section level4">
-<h4>Risks factors:</h4>
+</div>
+<div id="results" class="section level3">
+<h3>Results</h3>
+<p>Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.</p>
+<div id="or-interpretations" class="section level4">
+<h4>OR Interpretations:</h4>
 <p><em>Overall health condition</em>: Those who responded as “Poor” when asked about their overall health condition had <strong>11 times</strong> the increased odds of elevated depression risk compared to those who responded as “Excellent”, adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, social network size, and living situation.</p>
 <p><em>Self-rated memory</em>: Those who responded as “Poor” when asked to rate their memory had 1.8 times the increased odds of elevated depression risk compared to those who responded as “Excellent”, adjusting for gender, age category, race/ethnicity, assistive device use, overall health condition, social network size, and living situation.</p>
 <p><em>Assistive device</em>: Those who responded “yes” to using a cane, walker, or wheelchair had 1.5 times the increased odds of elevated depression risk compared to those who responded as “No”, adjusting for gender, age category, race/ethnicity, self-rated memory, overall health condition, social network size, and living situation.</p>
 <p><em>Living situation</em>: Those who responded with “Agree NOT at all” when asked if they liked their current living situation had approximately 3.1 times the increased odds of elevated depression risk compared to those who responded as “Agree a lot”, adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, overall health condition, and social network size.</p>
-</div>
-<div id="protective-factors" class="section level4">
-<h4>Protective factors:</h4>
 <p><em>Age</em>: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of elevated depression risk compared to respondents who were age categories 65 to 69, adjusting for gender, race/ethnicity, assistive device use, self-rated memory, overall health condition, social network size, and living situation.</p>
 <p><em>Race</em>: Non Hispanic White respondents had 24.7% decreased odds of elevated depression risk compared to Black respondents, adjusting for gender, age category, assistive device use, self-rated memory, overall health condition, social network size, and living situation.</p>
 <table>
@@ -454,127 +447,127 @@ Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity 
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">genderMale</td>
+<td align="left">Gender: Male</td>
 <td align="right">-0.126</td>
 <td align="right">0.881</td>
 <td align="right">0.131</td>
 </tr>
 <tr class="odd">
-<td align="left">age_cat70 to 74</td>
+<td align="left">Age Group: 70 to 74</td>
 <td align="right">-0.279</td>
 <td align="right">0.756</td>
 <td align="right">0.039</td>
 </tr>
 <tr class="even">
-<td align="left">age_cat75 to 79</td>
+<td align="left">Age Group: 75 to 79</td>
 <td align="right">-0.052</td>
 <td align="right">0.949</td>
 <td align="right">0.693</td>
 </tr>
 <tr class="odd">
-<td align="left">age_cat80 to 84</td>
+<td align="left">Age Group: 80 to 84</td>
 <td align="right">-0.261</td>
 <td align="right">0.770</td>
 <td align="right">0.064</td>
 </tr>
 <tr class="even">
-<td align="left">age_cat85 to 89</td>
+<td align="left">Age Group: 85 to 89</td>
 <td align="right">-0.311</td>
 <td align="right">0.733</td>
 <td align="right">0.043</td>
 </tr>
 <tr class="odd">
-<td align="left">age_cat90+</td>
+<td align="left">Age Group: 90+</td>
 <td align="right">-0.410</td>
 <td align="right">0.664</td>
 <td align="right">0.024</td>
 </tr>
 <tr class="even">
-<td align="left">race_ethnicityHispanic</td>
+<td align="left">Race: Hispanic</td>
 <td align="right">0.172</td>
 <td align="right">1.187</td>
 <td align="right">0.270</td>
 </tr>
 <tr class="odd">
-<td align="left">race_ethnicityOther, non-hispanic</td>
+<td align="left">Race: Other, non-hispanic</td>
 <td align="right">0.250</td>
 <td align="right">1.284</td>
 <td align="right">0.248</td>
 </tr>
 <tr class="even">
-<td align="left">race_ethnicityWhite, non-hispanic</td>
+<td align="left">Race: White, non-hispanic</td>
 <td align="right">-0.284</td>
 <td align="right">0.753</td>
 <td align="right">0.002</td>
 </tr>
 <tr class="odd">
-<td align="left">cane_walker_wheelchairYes</td>
+<td align="left">Cane Walking/Wheelchair: Yes</td>
 <td align="right">0.407</td>
 <td align="right">1.503</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">memoryVery Good</td>
+<td align="left">Memory: Very Good</td>
 <td align="right">0.047</td>
 <td align="right">1.048</td>
 <td align="right">0.790</td>
 </tr>
 <tr class="odd">
-<td align="left">memoryGood</td>
+<td align="left">Memory: Good</td>
 <td align="right">0.065</td>
 <td align="right">1.067</td>
 <td align="right">0.701</td>
 </tr>
 <tr class="even">
-<td align="left">memoryFair</td>
+<td align="left">Memory: Fair</td>
 <td align="right">0.437</td>
 <td align="right">1.549</td>
 <td align="right">0.013</td>
 </tr>
 <tr class="odd">
-<td align="left">memoryPoor</td>
+<td align="left">Memory: Poor</td>
 <td align="right">0.611</td>
 <td align="right">1.842</td>
 <td align="right">0.006</td>
 </tr>
 <tr class="even">
-<td align="left">overall_healthVery Good</td>
+<td align="left">Overall Health: Very Good</td>
 <td align="right">0.392</td>
 <td align="right">1.480</td>
 <td align="right">0.074</td>
 </tr>
 <tr class="odd">
-<td align="left">overall_healthGood</td>
+<td align="left">Overall Health: Good</td>
 <td align="right">0.897</td>
 <td align="right">2.453</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">overall_healthFair</td>
+<td align="left">Overall Health: Fair</td>
 <td align="right">1.444</td>
 <td align="right">4.236</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="odd">
-<td align="left">overall_healthPoor</td>
+<td align="left">Overall Health: Poor</td>
 <td align="right">2.400</td>
 <td align="right">11.019</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">likes_living_situationAgree a little</td>
+<td align="left">Likes Living Situation: Agree a little</td>
 <td align="right">0.724</td>
 <td align="right">2.064</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="odd">
-<td align="left">likes_living_situationAgree not at all</td>
+<td align="left">Likes Living Situation: Agree not at all</td>
 <td align="right">1.134</td>
 <td align="right">3.108</td>
 <td align="right">0.000</td>
 </tr>
 <tr class="even">
-<td align="left">social_network_size</td>
+<td align="left">Social Network Size</td>
 <td align="right">-0.028</td>
 <td align="right">0.973</td>
 <td align="right">0.379</td>
@@ -586,7 +579,7 @@ Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity 
 <div id="discussion" class="section level3">
 <h3>Discussion</h3>
 <p>The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations. For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn’t find any significant associations with gender, or social network size.</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected based on literature. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing “poor” health to “excellent” health. We also see that self-rated memory and if someone likes their living situation are also significant risk factors for depression among this population. ======= The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing “poor” health to “excellent” health. We also see that self-rated memory and if someone likes their living situation can also be significant risk factors for depression among this population. &gt;&gt;&gt;&gt;&gt;&gt;&gt; 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b</p>
+<p>The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected based on literature. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing “poor” health to “excellent” health. We also see that self-rated memory and if someone likes their living situation are also significant risk factors for depression among this population.</p>
 </div>
 
 

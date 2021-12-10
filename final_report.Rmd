@@ -123,7 +123,7 @@ We performed exploratory data analyses including visualizations of predictors of
 
 - Figure 2. Respondents who scored as low depression risk recorded their perceived overall health within the Excellent to Good range while respondents with an elevated risk of depression were more likely to report their overall health within the good to poor range.
 
-<center>
+
 **Click [here](exploratory_analysis.html) to see the the full exploratory analyses with brief comments.**
 
 
@@ -132,7 +132,7 @@ We performed exploratory data analyses including visualizations of predictors of
 
 **Click [here](data.html) to see summary statistics, frequency tables, and demographic frequency visualizations.**
 
-</center>
+
 <br>
 
 
@@ -143,18 +143,12 @@ We conducted multivariable logistic regression to identify predictors of depress
 
 
 
- **Results**: 
+### Results
 
- 
 Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity (White, non-Hispanic), cane_walker_wheelchair (Yes), memory (Fair), memory (Poor), overall_health (Good), overall_health (Fair), overall_health (Poor), likes_living_situation (Agree a little,) likes_living_situation (Agree not at all), all had significant p-values that were less than alpha .05.
-<center>
 
-<br>
-**OR Interpretations** </center>
-<br>
+#### OR Interpretations:
 
-
-#### Risks factors:
  *Overall health condition*: Those who responded as "Poor" when asked about their overall health condition had **11 times** the increased odds of elevated depression risk compared to those who responded as "Excellent", adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, social network size, and living situation. 
 
  *Self-rated memory*: Those who responded as "Poor" when asked to rate their memory had 1.8 times the increased odds of elevated depression risk compared to those who responded as "Excellent", adjusting for gender, age category, race/ethnicity, assistive device use, overall health condition, social network size, and living situation. 
@@ -163,32 +157,34 @@ Predictors age category (70-74), age_cat (85-89), age_cat (90+), race_ethnicity 
  
  *Living situation*: Those who responded with "Agree NOT at all" when asked if they liked their current living situation had approximately 3.1 times the increased odds of elevated depression risk compared to those who responded as "Agree a lot", adjusting for gender, age category, race/ethnicity, assistive device use, self-rated memory, overall health condition, and social network size. 
 
- 
-####  Protective factors:
-
  *Age*: Respondents among those who were in age category 85 to 89 had 26.7% decreased odds of elevated depression risk compared to respondents who were age categories 65 to 69, adjusting for gender, race/ethnicity, assistive device use, self-rated memory, overall health condition, social network size, and living situation. 
  
  *Race*: Non Hispanic White respondents had 24.7% decreased odds of elevated depression risk compared to Black respondents, adjusting for gender, age category, assistive device use, self-rated memory, overall health condition, social network size, and living situation.
 
- 
-```{r, echo=FALSE}
+```{r,message=FALSE, warning=FALSE, echo=FALSE}
 logit_model = nhats %>%
   mutate(phq_cat = if_else(phq_cat == "Low Depression Risk", 0, 1)) %>%
   glm(phq_cat ~ gender + age_cat + race_ethnicity + cane_walker_wheelchair + memory + overall_health + likes_living_situation + social_network_size, family = "binomial", data = .) 
+
 
 logit_model %>%
   broom::tidy() %>%
   mutate(OR = exp(estimate)) %>%
   select(term, betas = estimate, OR, p.value) %>%
+  mutate(term = str_replace(term, "age_cat", "Age Group: ")) %>%
+  mutate(term = str_replace(term, "gender", "Gender: ")) %>%
+  mutate(term = str_replace(term, "race_ethnicity", "Race: ")) %>%
+  mutate(term = str_replace(term, "cane_walker_wheelchair", "Cane Walking/Wheelchair: ")) %>%
+  mutate(term = str_replace(term, "memory", "Memory: ")) %>%
+  mutate(term = str_replace(term, "overall_health", "Overall Health: ")) %>%
+  mutate(term = str_replace(term, "likes_living_situation", "Likes Living Situation: ")) %>%
+  mutate(term = str_replace(term, "social_network_size", "Social Network Size")) %>%
   knitr::kable(digits = 3)
+
 ```
 
 ### Discussion
 The data supported some of our expectations that were based on findings from the literature, however it did not support all of our expectations.  For example, in this dataset, our analyses suggests that older age ranges (70-74, 80-84, 85-89, and 90+) were protective against depression risk compared to the reference group (65-69). We also didn't find any significant associations with gender, or social network size. 
 
-<<<<<<< HEAD
-The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected based on literature. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation are also significant risk factors for depression among this population.
-=======
-The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health.  We also see that self-rated memory and if someone likes their living situation can also be significant risk factors for depression among this population.
->>>>>>> 613c99ce8b99a4d26a4c6bfdbc33bfd75ec1267b
+The findings that poor memory, poor overall health condition, and belonging to a certain racial group are associated with depression outcomes align with what we would have expected based on literature. It was interesting to see that the measure of association for overall health condition (OR=11) was very strong when comparing "poor" health to "excellent" health. We also see that self-rated memory and if someone likes their living situation are also significant risk factors for depression among this population.
 
