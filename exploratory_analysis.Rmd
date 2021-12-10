@@ -151,18 +151,13 @@ ggplotly(memory_plot)
 
 ####  Visualizing any differences in depression outcome by predictor, use of assistive devices (cane, walker, wheelchair). 
 
-<<<<<<< HEAD
-- Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their depression outcome status - Low Depression Risk or Elevated Depression Risk. The figure is stratified by if participants responded Yes, or No (x-axis) using a cane, walker, or wheelchare. There doesn't appear to be a difference in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
-=======
-Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their level of depression symptom risk. The figure is stratified by if participants responded Yes, or No to using a cane, walker, or wheelchir. 
+Survey respondents were asked if they used a cane walker wheelchair. The plot below is a visualization of the proportion of respondents in this dataset by their level of depression symptom risk. The figure is stratified by if participants responded Yes, or No to using a cane, walker, or wheelchair. 
 
 Initial observations:
 
 
--  A higher proportion of those who responded to using an assitive device having elevated risk for depression symptoms compared to those who responded "no" using an assistive device and have low risk of depression symptoms. T
+-  A higher proportion of those who responded to using an assitive device having elevated risk for depression symptoms compared to those who responded "no" using an assistive device and have low risk of depression symptoms.
 - There doesn't appear to be any differences in proportion of respondents use or don't use an assistive device among those who had elevated depression risk. Among those who had a low risk of depression scores, we see that there is a higher proportion respondents that do use an assistive device. 
-
->>>>>>> c8c17fe033095c299968cbf5e1e125bfeff00fe3
 
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE, fig.align='center'}
